@@ -77,7 +77,8 @@ public class invertedIndex {
 
 //Mapper  Class Template
 	// Need to replace the four type labels there with actual Java class names
-public static class SwitchMapper extends Mapper<LongWritable, Text, LongWritable, Text > {
+	//<KEYIN,VALUEIN,KEYOUT,VALUEOUT>
+public static class SwitchMapper extends Mapper<LongWritable, Text, Text, Text > {
 
 //@Override   // we are overriding Mapper's map() method
 //map methods takes three input parameters
