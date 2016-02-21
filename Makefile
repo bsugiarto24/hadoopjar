@@ -20,7 +20,6 @@ get:
 clean:
 	rm -r output
 	hadoop fs -rm -r /user/bsugiart/test/output
-	rm *.class
 
 show:
 	cat output/part-r-00000 
