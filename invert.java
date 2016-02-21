@@ -62,7 +62,7 @@ public class invert {
 			job.setOutputValueClass(Text.class); // specify the output class (what reduce() emits) for value
 			
 			// step 6: Set up other job parameters at will
-			job.setJobName("Program 1");
+			job.setJobName("Program 2");
 			
 			// step 7:  ?
 			
