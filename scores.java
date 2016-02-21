@@ -112,7 +112,7 @@ public static class SwitchReducer extends  Reducer< LongWritable, Text, LongWrit
 			String text[] =  str.split(",");
 			
 			numPurchased += Long.parseLong(text[1]);			
-			revenue += Long.parseLong(text[1]) * Long.parseLong(text[2]) * 100;
+			revenue += Long.parseLong(text[1].trim()) * Long.parseLong(text[2]) * 100;
 			shipping += Long.parseLong(text[3]) * 100;
 		}
 		
