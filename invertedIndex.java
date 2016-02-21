@@ -58,11 +58,11 @@ public class invertedIndex {
 			//  step 5: Set up output information
 			job.setMapOutputKeyClass(LongWritable.class);
 			job.setMapOutputValueClass(Text.class);
-			job.setOutputKeyClass(Text.class); // specify the output class (what reduce() emits) for key
+			job.setOutputKeyClass(LongWritable.class); // specify the output class (what reduce() emits) for key
 			job.setOutputValueClass(Text.class); // specify the output class (what reduce() emits) for value
 			
 			// step 6: Set up other job parameters at will
-			job.setJobName("Program 2");
+			job.setJobName("Program 4");
 			
 			// step 7:  ?
 			
@@ -88,47 +88,26 @@ public static class SwitchMapper extends Mapper<LongWritable, Text, LongWritable
 	public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException 
 	{
 	 
-		String str =  value.toString().toLowerCase();
-				 
-		for (int i = 0; i < str.length() - 1; i++) { 	
-		  	//there is a double
-			if (str.charAt(i) == str.charAt(i+1)) {
-		        //emit(str, str.charAt(i));
-				//LongWritable outKey = new LongWritable();
-				Text out = new Text(str);		          
-			      
-			    context.write(key, out);
-		        break;
-			} 
-		}
+		context.write(key, value);
+		
 	} // map
 } // MyMapperClass
 
 
 //Reducer Class Template
 //needs to replace the four type labels with actual Java class names
-public static class SwitchReducer extends  Reducer< LongWritable, Text, Text, Text> {
+public static class SwitchReducer extends  Reducer< LongWritable, Text, LongWritable, Text> {
 
 // note: InValueType is a type of a single value Reducer will work with
 // the parameter to reduce() method will be Iterable<InValueType> - i.e. a list of these values
 
 @Override  // we are overriding the Reducer's reduce() method
 
-//reduce takes three input parameters
-//first parameter: input key
-//second parameter: a list of values associated with the key
-//third parameter: container  for emitting output key-value pairs
 
 	public void reduce(LongWritable key, Iterable<Text> values, Context context) throws IOException, InterruptedException 
 	{
-	
-		String str = "";
-		
-		for (Text val : values) {
-			str = val.toString();
-		}
-		
-		context.write(new Text(str), new Text(new StringBuilder(str).reverse().toString()));
+		for (Text val : values)
+			context.write(key, val);
 
 	 } 
 } // reducer
