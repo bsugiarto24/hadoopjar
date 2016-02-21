@@ -47,14 +47,14 @@ public class repeatLetters {
 			
 			//  step 3:  Set Input and Output files
 			FileInputFormat.addInputPath(job, new Path("prog1.txt")); // put what you need as input file
-			FileOutputFormat.setOutputPath(job, new Path("./test/","output.txt")); // put what you need as output file
+			FileOutputFormat.setOutputPath(job, new Path("./test/","output")); // put what you need as output file
 			
 			// step 4:  Register mapper and reducer
 			job.setMapperClass(SwitchMapper.class);
 			job.setReducerClass(SwitchReducer.class);
 			  
 			//  step 5: Set up output information
-			job.setOutputKeyClass(LongWritable.class); // specify the output class (what reduce() emits) for key
+			job.setOutputKeyClass(Text.class); // specify the output class (what reduce() emits) for key
 			job.setOutputValueClass(Text.class); // specify the output class (what reduce() emits) for value
 			
 			// step 6: Set up other job parameters at will
@@ -65,8 +65,6 @@ public class repeatLetters {
 			// step 8: profit
 			System.exit(job.waitForCompletion(true) ? 0:1);
 			
-			
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -75,7 +73,7 @@ public class repeatLetters {
 
 //Mapper  Class Template
 	// Need to replace the four type labels there with actual Java class names
-public static class SwitchMapper extends Mapper<LongWritable, Text, LongWritable, Text > {
+public static class SwitchMapper extends Mapper<Text, Text, Text, Text > {
 
 //@Override   // we are overriding Mapper's map() method
 //map methods takes three input parameters
@@ -83,7 +81,7 @@ public static class SwitchMapper extends Mapper<LongWritable, Text, LongWritable
 //second parameter: input value
 //third parameter: container for emitting output key-value pairs
 
-	public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException 
+	public void map(Text key, Text value, Context context) throws IOException, InterruptedException 
 	{
 	 
 		String str =  value.toString().toLowerCase();
@@ -105,7 +103,7 @@ public static class SwitchMapper extends Mapper<LongWritable, Text, LongWritable
 
 //Reducer Class Template
 //needs to replace the four type labels with actual Java class names
-public static class SwitchReducer extends  Reducer< LongWritable, Text, LongWritable, Text> {
+public static class SwitchReducer extends  Reducer< Text, Text, Text, Text> {
 
 // note: InValueType is a type of a single value Reducer will work with
 // the parameter to reduce() method will be Iterable<InValueType> - i.e. a list of these values
@@ -117,17 +115,31 @@ public static class SwitchReducer extends  Reducer< LongWritable, Text, LongWrit
 //second parameter: a list of values associated with the key
 //third parameter: container  for emitting output key-value pairs
 
-	public void reduce( LongWritable key, Iterable<Text> values, Context context) throws IOException, InterruptedException 
+	public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException 
 	{
 	
-		String name = "";
+		String str = "";
 		
 		for (Text val : values) {
-			name = val.toString();
+			str = val.toString();
 		}
 		
+		for (int i = 0; i < str.length() - 1; i++) { 	
+		  	//there is a double
+			if (str.charAt(i) == str.charAt(i+1)) {
+		        //emit(str, str.charAt(i));
+				//LongWritable outKey = new LongWritable();
+				Text out = new Text(str);
+				Text outKey = new Text(str.charAt(i) + "");
+			      
+			    context.write(outKey, out);
+		        break;
+			} 
+		}
+		
+		
 		// emit final output
-		context.write(key, new Text(name));   
+		context.write(key, new Text(str));   
 	
 	 } 
 } // reducer
