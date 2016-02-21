@@ -54,7 +54,7 @@ public class repeatLetters {
 			job.setReducerClass(SwitchReducer.class);
 			  
 			//  step 5: Set up output information
-			job.setOutputKeyClass(Text.class); // specify the output class (what reduce() emits) for key
+			job.setOutputKeyClass(LongWritable.class); // specify the output class (what reduce() emits) for key
 			job.setOutputValueClass(Text.class); // specify the output class (what reduce() emits) for value
 			
 			// step 6: Set up other job parameters at will
