@@ -106,7 +106,7 @@ public static class SwitchReducer extends  Reducer< LongWritable, Text, LongWrit
 		job.setJarByClass(mixture.class);  
 		
 		//  step 3:  Set Input and Output files
-		FileInputFormat.addInputPath(job, new Path("./test/", "data")); // put what you need as input file
+		FileInputFormat.addInputPath(job, new Path("./test/", "data.txt")); // put what you need as input file
 		FileOutputFormat.setOutputPath(job, new Path("./test/","output")); // put what you need as output file
 		
 		// step 4:  Register mapper and reducer
