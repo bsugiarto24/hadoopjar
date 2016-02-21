@@ -76,21 +76,17 @@ public class scores {
 
 
 //Mapper  Class Template
-	// Need to replace the four type labels there with actual Java class names
 public static class SwitchMapper extends Mapper<LongWritable, Text, LongWritable, Text > {
 
-//@Override   // we are overriding Mapper's map() method
-//map methods takes three input parameters
-//first parameter: input key 
-//second parameter: input value
-//third parameter: container for emitting output key-value pairs
 
 	public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException 
 	{
 	 
-		String str =  value.toString().toLowerCase();
+		String text[] =  value.toString().split(",");
 				 
-		context.write(key, new Text(str));
+		//3902	305, 114, 37.78, 5.38
+		
+		context.write(key, new Text(text[1]));
 		
 		
 	} // map
@@ -105,16 +101,31 @@ public static class SwitchReducer extends  Reducer< LongWritable, Text, LongWrit
 	@Override 
 	public void reduce(LongWritable key, Iterable<Text> values, Context context) throws IOException, InterruptedException 
 	{
-	
-		String str = "";
+		
+		//<itemId>, <numPurchased>, <pricePerUnit>, <shippingCost>
+		long numPurchased, shipping, profit, revenue;
+		numPurchased  = shipping = profit = revenue = 0;
 		
 		for (Text val : values) {
-			str = val.toString();
+			String str = val.toString();
+			String text[] =  str.split(",");
+			
+			numPurchased += Long.parseLong(text[1]);			
+			revenue += Long.parseLong(text[1]) + Long.parseLong(text[2]) * 100;
+			shipping += Long.parseLong(text[3]) * 100;
 		}
 		
-		context.write(key, new Text(str));
-
-	 } 
+		if(numPurchased < 100) {
+			profit = (long) ((shipping + revenue) * 1.025);
+			context.write(key, new Text(numPurchased + ", " + profit/100 + "." + profit%100));
+		}else {
+			profit += (long) ((shipping + revenue) * 1.025 * 100 / numPurchased);
+			profit += (long) ((shipping + revenue) * 1.03 * (numPurchased - 100) / numPurchased);
+			context.write(key, new Text(numPurchased + ", " + profit/100 + "." + profit%100));
+		}
+				
+	}
+ 
 } // reducer
 
 
