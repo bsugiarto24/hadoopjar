@@ -56,7 +56,7 @@ public class repeatLetters {
 			//  step 5: Set up output information
 			job.setMapOutputKeyClass(LongWritable.class);
 			job.setMapOutputValueClass(Text.class);
-			job.setOutputKeyClass(LongWritable.class); // specify the output class (what reduce() emits) for key
+			job.setOutputKeyClass(Text.class); // specify the output class (what reduce() emits) for key
 			job.setOutputValueClass(Text.class); // specify the output class (what reduce() emits) for value
 			
 			// step 6: Set up other job parameters at will
@@ -105,7 +105,7 @@ public static class SwitchMapper extends Mapper<LongWritable, Text, LongWritable
 
 //Reducer Class Template
 //needs to replace the four type labels with actual Java class names
-public static class SwitchReducer extends  Reducer< LongWritable, Text, LongWritable, Text> {
+public static class SwitchReducer extends  Reducer< LongWritable, Text, Text, Text> {
 
 // note: InValueType is a type of a single value Reducer will work with
 // the parameter to reduce() method will be Iterable<InValueType> - i.e. a list of these values
@@ -134,7 +134,7 @@ public static class SwitchReducer extends  Reducer< LongWritable, Text, LongWrit
 				Text out = new Text(str);
 				Text outKey = new Text(str.charAt(i) + "");
 			      
-			    context.write(key, out);
+			    context.write(out, outKey);
 		        break;
 			} 
 		}
