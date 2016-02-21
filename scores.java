@@ -48,7 +48,7 @@ public class scores {
 			job.setJarByClass(scores.class);  
 			
 			//  step 3:  Set Input and Output files
-			FileInputFormat.addInputPath(job, new Path("prog1.txt")); // put what you need as input file
+			FileInputFormat.addInputPath(job, new Path("prog3.txt")); // put what you need as input file
 			FileOutputFormat.setOutputPath(job, new Path("./test/","output")); // put what you need as output file
 			
 			// step 4:  Register mapper and reducer
