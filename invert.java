@@ -1,5 +1,5 @@
 
-	           
+	    //		
 
 //CSC 369: Distributed Computing
 //Bryan Sugiarto
@@ -56,7 +56,7 @@ public class invert {
 			job.setReducerClass(SwitchReducer.class);
 			  
 			//  step 5: Set up output information
-			job.setMapOutputKeyClass(Text.class);
+			job.setMapOutputKeyClass(LongWritable.class);
 			job.setMapOutputValueClass(Text.class);
 			job.setOutputKeyClass(Text.class); // specify the output class (what reduce() emits) for key
 			job.setOutputValueClass(Text.class); // specify the output class (what reduce() emits) for value
@@ -77,7 +77,7 @@ public class invert {
 
 //Mapper  Class Template
 	// Need to replace the four type labels there with actual Java class names
-public static class SwitchMapper extends Mapper<Text, Text, Text, Text > {
+public static class SwitchMapper extends Mapper<LongWritable, Text, LongWritable, Text > {
 
 //@Override   // we are overriding Mapper's map() method
 //map methods takes three input parameters
@@ -85,19 +85,29 @@ public static class SwitchMapper extends Mapper<Text, Text, Text, Text > {
 //second parameter: input value
 //third parameter: container for emitting output key-value pairs
 
-	public void map(Text key, Text value, Context context) throws IOException, InterruptedException 
+	public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException 
 	{
-		// emit(str, new StringBuilder(str).reverse().toString());
+	 
 		String str =  value.toString().toLowerCase();
-		context.write(new Text(str), new Text(new StringBuilder(str).reverse().toString()));
-		   
+				 
+		for (int i = 0; i < str.length() - 1; i++) { 	
+		  	//there is a double
+			if (str.charAt(i) == str.charAt(i+1)) {
+		        //emit(str, str.charAt(i));
+				//LongWritable outKey = new LongWritable();
+				Text out = new Text(str);		          
+			      
+			    context.write(key, out);
+		        break;
+			} 
+		}
 	} // map
 } // MyMapperClass
 
 
 //Reducer Class Template
 //needs to replace the four type labels with actual Java class names
-public static class SwitchReducer extends  Reducer< Text, Text, Text, Text> {
+public static class SwitchReducer extends  Reducer< LongWritable, Text, Text, Text> {
 
 // note: InValueType is a type of a single value Reducer will work with
 // the parameter to reduce() method will be Iterable<InValueType> - i.e. a list of these values
@@ -109,7 +119,7 @@ public static class SwitchReducer extends  Reducer< Text, Text, Text, Text> {
 //second parameter: a list of values associated with the key
 //third parameter: container  for emitting output key-value pairs
 
-	public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException 
+	public void reduce(LongWritable key, Iterable<Text> values, Context context) throws IOException, InterruptedException 
 	{
 	
 		String str = "";
@@ -118,14 +128,15 @@ public static class SwitchReducer extends  Reducer< Text, Text, Text, Text> {
 			str = val.toString();
 		}
 		
-		context.write(key, new Text(str));
+		context.write(new Text(str), new Text(new StringBuilder(str).reverse().toString()));
 
-		
 	 } 
 } // reducer
 
 
 } // MyMapReduceDriver
+
+
 
 
 

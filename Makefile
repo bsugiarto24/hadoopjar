@@ -1,13 +1,17 @@
-
 .PHONY: clean all dine test
 	
 all: dine
 
 dine:
-	gcc -Wall -g -lpthread -o dine dine.c
+	javac -cp hadoop-core-1.2.1.jar repeatLetters.java 
+	jar cvfm repeat.jar manifest.txt *.class
 
-test:
-	~pn-cs453/demos/tryAsgn3
+get:
+	hadoop fs -get /user/bsugiart/test/output output
 
 clean:
-	rm dine
+	rm -r output
+	hadoop fs -rm -r /user/bsugiart/test/output
+
+show:
+	cat output/part-r-00000 
