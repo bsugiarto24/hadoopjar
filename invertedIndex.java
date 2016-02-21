@@ -56,7 +56,7 @@ public class invertedIndex {
 			job.setReducerClass(SwitchReducer.class);
 			  
 			//  step 5: Set up output information
-			job.setMapOutputKeyClass(LongWritable.class);
+			job.setMapOutputKeyClass(Text.class);
 			job.setMapOutputValueClass(Text.class);
 			job.setOutputKeyClass(Text.class); // specify the output class (what reduce() emits) for key
 			job.setOutputValueClass(Text.class); // specify the output class (what reduce() emits) for value
@@ -78,7 +78,7 @@ public class invertedIndex {
 //Mapper  Class Template
 	// Need to replace the four type labels there with actual Java class names
 	//<KEYIN,VALUEIN,KEYOUT,VALUEOUT>
-public static class SwitchMapper extends Mapper<LongWritable, Text, Text, Text > {
+public static class SwitchMapper extends Mapper<Text, Text, Text, Text > {
 
 //@Override   // we are overriding Mapper's map() method
 //map methods takes three input parameters
