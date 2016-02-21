@@ -124,13 +124,13 @@ public static class SwitchReducer extends  Reducer< LongWritable, Text, LongWrit
 				profit = ((shipping + revenue) * 1.025);
 				profit *= 100;
 				profit = (long) profit;
-				context.write(key, new Text(numPurchased + ", " + profit/100);
+				context.write(key, new Text(numPurchased + ", " + profit/100));
 			}else {
 				profit += (long) ((shipping + revenue) * 1.0225 * 100 / numPurchased);
 				profit += (long) ((shipping + revenue) * 1.03 * (numPurchased - 100) / numPurchased);
 				profit *= 100;
 				profit = (long) profit;
-				context.write(key, new Text(numPurchased + ", " + profit/100);
+				context.write(key, new Text(numPurchased + ", " + profit/100));
 			}
 		}catch(Exception e) {
 			
