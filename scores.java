@@ -104,24 +104,29 @@ public static class SwitchReducer extends  Reducer< LongWritable, Text, LongWrit
 		//for (Text val : values) 
 		//	context.write(key, new Text(val));
 		//<itemId>, <numPurchased>, <pricePerUnit>, <shippingCost>
-		long numPurchased, shipping, profit, revenue;
-		numPurchased  = shipping = profit = revenue = 0;
+		long numPurchased, profit;
+		double shipping, revenue;
+		
+		numPurchased = profit = 0;
+		shipping = revenue = 0;
 		
 		for (Text val : values) {
 			String str = val.toString();
 			String text[] =  str.split(",");
 			
 			numPurchased += Long.parseLong(text[1].trim());			
-			revenue += Long.parseLong(text[1].trim()) * Long.parseLong(text[2].trim()) * 100;
-			shipping += Long.parseLong(text[3].trim()) * 100;
+			revenue += Long.parseLong(text[1].trim()) * Double.parseDouble(text[2].trim());
+			shipping += Double.parseDouble(text[3].trim());
 		}
 		
 		if(numPurchased < 100) {
 			profit = (long) ((shipping + revenue) * 1.025);
+			profit *= 100;
 			context.write(key, new Text(numPurchased + ", " + profit/100 + "." + profit%100));
 		}else {
 			profit += (long) ((shipping + revenue) * 1.025 * 100 / numPurchased);
 			profit += (long) ((shipping + revenue) * 1.03 * (numPurchased - 100) / numPurchased);
+			profit *= 100;
 			context.write(key, new Text(numPurchased + ", " + profit/100 + "." + profit%100));
 		}
 				
