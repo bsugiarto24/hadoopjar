@@ -1,4 +1,3 @@
-package hadoopjar;
 
 //CSC 369: Distributed Computing
 //Bryan Sugiarto
@@ -44,7 +43,7 @@ public class repeatLetters {
 			Job  job = Job.getInstance();  //  job = new Job() is now deprecated
 			 
 			// step 2: register the MapReduce class
-			job.setJarByClass(mixture.class);  
+			job.setJarByClass(repeatLetters.class);  
 			
 			//  step 3:  Set Input and Output files
 			FileInputFormat.addInputPath(job, new Path("prog1.txt")); // put what you need as input file
