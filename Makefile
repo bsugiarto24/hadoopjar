@@ -10,6 +10,9 @@ invert:
 	javac -cp hadoop-core-1.2.1.jar invert.java 
 	jar cvfm invert.jar manifest2.txt *.class
 	
+scores:
+	javac -cp hadoop-core-1.2.1.jar scores.java 
+	jar cvfm scores.jar manifest3.txt *.class
 
 get:
 	hadoop fs -get /user/bsugiart/test/output output
