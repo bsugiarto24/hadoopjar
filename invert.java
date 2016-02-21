@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class invert {
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		
 		try {
 			Scanner scan = new Scanner(new File(args[0]));
@@ -21,7 +21,6 @@ public class invert {
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-		}
-		
-	}
+		}	
+	}*/
 }

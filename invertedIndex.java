@@ -13,7 +13,7 @@ public class invertedIndex {
 	//<itemId>, <numPurchased>, <pricePerUnit>, <shippingCost>
 	
 	
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		
 		try {
 			Scanner scan = new Scanner(new File(args[0]));
@@ -31,7 +31,6 @@ public class invertedIndex {
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-		}
-		
-	}
+		}	
+	}*/
 }

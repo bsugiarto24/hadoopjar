@@ -97,7 +97,7 @@ public static class SwitchReducer extends  Reducer< LongWritable, Text, LongWrit
 
 
 	//  MapReduce Driver
-	public static void main(String[] args) throws Exception {
+	/*public static void main(String[] args) throws Exception {
 	
 		// step 1: get a new MapReduce Job object
 		Job  job = Job.getInstance();  //  job = new Job() is now deprecated
@@ -125,7 +125,7 @@ public static class SwitchReducer extends  Reducer< LongWritable, Text, LongWrit
 		// step 8: profit
 		System.exit(job.waitForCompletion(true) ? 0:1);
 	
-	} // main()
+	} // main() */
 
 
 } // MyMapReduceDriver
