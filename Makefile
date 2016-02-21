@@ -16,7 +16,7 @@ scores:
 	
 index:
 	javac -cp hadoop-core-1.2.1.jar invertedIndex.java 
-	jar cvfm scores.jar manifest4.txt *.class
+	jar cvfm index.jar manifest4.txt *.class
 
 get:
 	hadoop fs -get /user/bsugiart/test/output output
