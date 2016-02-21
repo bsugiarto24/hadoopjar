@@ -110,24 +110,28 @@ public static class SwitchReducer extends  Reducer< LongWritable, Text, LongWrit
 		numPurchased = profit = 0;
 		shipping = revenue = 0;
 		
-		for (Text val : values) {
-			String str = val.toString();
-			String text[] =  str.split(",");
+		try{
+			for (Text val : values) {
+				String str = val.toString();
+				String text[] =  str.split(",");
+				
+				numPurchased += Long.parseLong(text[1].trim());			
+				revenue += Long.parseLong(text[1].trim()) * Double.parseDouble(text[2].trim());
+				shipping += Double.parseDouble(text[3].trim());
+			}
 			
-			numPurchased += Long.parseLong(text[1].trim());			
-			revenue += Long.parseLong(text[1].trim()) * Double.parseDouble(text[2].trim());
-			shipping += Double.parseDouble(text[3].trim());
-		}
-		
-		if(numPurchased < 100) {
-			profit = (long) ((shipping + revenue) * 1.025);
-			profit *= 100;
-			context.write(key, new Text(numPurchased + ", " + profit/100 + "." + profit%100));
-		}else {
-			profit += (long) ((shipping + revenue) * 1.025 * 100 / numPurchased);
-			profit += (long) ((shipping + revenue) * 1.03 * (numPurchased - 100) / numPurchased);
-			profit *= 100;
-			context.write(key, new Text(numPurchased + ", " + profit/100 + "." + profit%100));
+			if(numPurchased < 100) {
+				profit = (long) ((shipping + revenue) * 1.025);
+				profit *= 100;
+				context.write(key, new Text(numPurchased + ", " + profit/100 + "." + profit%100));
+			}else {
+				profit += (long) ((shipping + revenue) * 1.0225 * 100 / numPurchased);
+				profit += (long) ((shipping + revenue) * 1.03 * (numPurchased - 100) / numPurchased);
+				profit *= 100;
+				context.write(key, new Text(numPurchased + ", " + profit/100 + "." + profit%100));
+			}
+		}catch(Exception e) {
+			
 		}
 				
 	}
