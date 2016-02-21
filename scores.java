@@ -101,9 +101,11 @@ public static class SwitchReducer extends  Reducer< LongWritable, Text, LongWrit
 	@Override 
 	public void reduce(LongWritable key, Iterable<Text> values, Context context) throws IOException, InterruptedException 
 	{
+		for (Text val : values) 
+			context.write(key, new Text(val));
 		
 		//<itemId>, <numPurchased>, <pricePerUnit>, <shippingCost>
-		long numPurchased, shipping, profit, revenue;
+		/*long numPurchased, shipping, profit, revenue;
 		numPurchased  = shipping = profit = revenue = 0;
 		
 		for (Text val : values) {
@@ -111,7 +113,7 @@ public static class SwitchReducer extends  Reducer< LongWritable, Text, LongWrit
 			String text[] =  str.split(",");
 			
 			numPurchased += Long.parseLong(text[1]);			
-			revenue += Long.parseLong(text[1]) + Long.parseLong(text[2]) * 100;
+			revenue += Long.parseLong(text[1]) * Long.parseLong(text[2]) * 100;
 			shipping += Long.parseLong(text[3]) * 100;
 		}
 		
@@ -122,7 +124,7 @@ public static class SwitchReducer extends  Reducer< LongWritable, Text, LongWrit
 			profit += (long) ((shipping + revenue) * 1.025 * 100 / numPurchased);
 			profit += (long) ((shipping + revenue) * 1.03 * (numPurchased - 100) / numPurchased);
 			context.write(key, new Text(numPurchased + ", " + profit/100 + "." + profit%100));
-		}
+		}*/
 				
 	}
  
