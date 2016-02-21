@@ -86,7 +86,7 @@ public static class SwitchMapper extends Mapper<LongWritable, Text, LongWritable
 				 
 		//3902	305, 114, 37.78, 5.38
 		
-		context.write(key, new Text(text[1]));
+		context.write(key, value);
 		
 		
 	} // map
