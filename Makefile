@@ -18,8 +18,9 @@ get:
 	hadoop fs -get /user/bsugiart/test/output output
 
 clean:
-	rm -r output
 	hadoop fs -rm -r /user/bsugiart/test/output
+	rm -r output
+	
 
 show:
 	cat output/part-r-00000 
