@@ -137,10 +137,6 @@ public static class SwitchReducer extends  Reducer< Text, Text, Text, Text> {
 			} 
 		}
 		
-		
-		// emit final output
-		context.write(key, new Text(str));   
-	
 	 } 
 } // reducer
 
