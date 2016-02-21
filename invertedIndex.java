@@ -58,7 +58,7 @@ public class invertedIndex {
 			//  step 5: Set up output information
 			job.setMapOutputKeyClass(LongWritable.class);
 			job.setMapOutputValueClass(Text.class);
-			job.setOutputKeyClass(LongWritable.class); // specify the output class (what reduce() emits) for key
+			job.setOutputKeyClass(Text.class); // specify the output class (what reduce() emits) for key
 			job.setOutputValueClass(Text.class); // specify the output class (what reduce() emits) for value
 			
 			// step 6: Set up other job parameters at will
@@ -88,7 +88,11 @@ public static class SwitchMapper extends Mapper<LongWritable, Text, LongWritable
 	public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException 
 	{
 	 
-		context.write(key, value);
+		String str = value.toString();
+		String text[] =  str.split(",");
+		
+		for(String word : text)
+			context.write(new Text(word), new Text(key.toString()));
 		
 	} // map
 } // MyMapperClass
@@ -96,7 +100,7 @@ public static class SwitchMapper extends Mapper<LongWritable, Text, LongWritable
 
 //Reducer Class Template
 //needs to replace the four type labels with actual Java class names
-public static class SwitchReducer extends  Reducer< LongWritable, Text, LongWritable, Text> {
+public static class SwitchReducer extends  Reducer< Text, Text, Text, Text> {
 
 // note: InValueType is a type of a single value Reducer will work with
 // the parameter to reduce() method will be Iterable<InValueType> - i.e. a list of these values
@@ -104,7 +108,7 @@ public static class SwitchReducer extends  Reducer< LongWritable, Text, LongWrit
 @Override  // we are overriding the Reducer's reduce() method
 
 
-	public void reduce(LongWritable key, Iterable<Text> values, Context context) throws IOException, InterruptedException 
+	public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException 
 	{
 		for (Text val : values)
 			context.write(key, val);
