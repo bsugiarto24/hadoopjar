@@ -82,7 +82,7 @@ public static class SwitchMapper extends Mapper<LongWritable, Text, LongWritable
 	public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException 
 	{
 	 
-		String text[] =  value.toString().split(",");
+		//String text[] =  value.toString().split(",");
 				 
 		//3902	305, 114, 37.78, 5.38
 		
