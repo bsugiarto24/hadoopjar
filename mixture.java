@@ -141,7 +141,7 @@ public static class SwitchReducer extends  Reducer< Text, Text, Text, Text> {
 	public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException 
 	{
 	
-		/*String str = "";
+		String str = "";
 		HashSet<String> arr = new HashSet<String>();
 		long count = 0, distinct = 0;
 		
@@ -156,11 +156,11 @@ public static class SwitchReducer extends  Reducer< Text, Text, Text, Text> {
 				if(!word.equals(""))
 					context.write(key, new Text(word));
 			}	
-		}*/
-		
-		for (Text val : values) {
-			context.write(key, val);
 		}
+		
+		/*for (Text val : values) {
+			context.write(key, val);
+		}*/
 
 	 } 
 } // reducer
