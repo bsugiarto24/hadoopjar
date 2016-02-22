@@ -36,7 +36,7 @@ public class mixture {
 			Job  job = Job.getInstance();  //  job = new Job() is now deprecated
 			 
 			// step 2: register the MapReduce class
-			job.setJarByClass(invertedIndex.class);  
+			job.setJarByClass(mixture.class);  
 			
 			//  step 3:  Set Input and Output files
 			FileInputFormat.addInputPath(job, new Path("prog5.txt")); // put what you need as input file
@@ -80,17 +80,49 @@ public static class SwitchMapper extends Mapper<LongWritable, Text, Text, Text >
 	{
 	 
 		String str =  value.toString();
+		String text[] = str.split(",");
 		
-		Text out = new Text(str);	
+		String shortest = text[0].trim(); //aaaaaa
+		String middle = text[1].trim();   //aaaa
+		String longest = text[2].trim();  //aa
+		String temp = "";
 		
-		String text[] = str.split(" ");
 		
-		for(String word : text) {
-			context.write(new Text(word), new Text(key.toString()));
+		//swap middle and longest
+		if(longest.length() < middle.length()) {
+			temp = longest;
+			longest = middle;
+			middle = temp;
 		}
-	      
-	    
 		
+		//swap middle and shortest
+		if(middle.length() < shortest.length()) {
+			temp = shortest;
+			shortest = middle;
+			middle = temp;
+		}
+		
+		//swap middle and longest
+		if(longest.length() < middle.length()) {
+			temp = longest;
+			longest = middle;
+			middle = temp;
+		}
+		
+		//emit largest
+		context.write(new Text(longest), new Text(""));
+		
+		//emit pairs
+		if(longest.length() > middle.length()) {
+			context.write(new Text(shortest), new Text(longest));
+			context.write(new Text(middle), new Text(longest));
+		}
+		//emit just the word
+		else {
+			context.write(new Text(shortest), new Text(""));
+			context.write(new Text(middle), new Text(""));
+		}
+
 	} // map
 } // MyMapperClass
 
@@ -104,10 +136,6 @@ public static class SwitchReducer extends  Reducer< Text, Text, Text, Text> {
 
 @Override  // we are overriding the Reducer's reduce() method
 
-//reduce takes three input parameters
-//first parameter: input key
-//second parameter: a list of values associated with the key
-//third parameter: container  for emitting output key-value pairs
 
 	public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException 
 	{
@@ -122,8 +150,14 @@ public static class SwitchReducer extends  Reducer< Text, Text, Text, Text> {
 			count++;
 		}
 		
-		distinct = arr.size();	
-		context.write(key, new Text(count + ", "+ distinct + ", " + arr.toString()));
+		if(count > 1) {
+			for(String word : arr) {
+				if(!word.equals(""))
+					context.write(key, new Text(word));
+			}	
+		}
+		
+
 	 } 
 } // reducer
 
