@@ -79,8 +79,8 @@ public static class SwitchMapper extends Mapper<LongWritable, Text, Text, Text >
 	public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException 
 	{
 	 
-		context.write(new Text(key.toString()), value);
-		/*String str =  value.toString();
+		//context.write(new Text(key.toString()), value);
+		String str =  value.toString();
 		String text[] = str.split(",");
 		
 		String shortest = text[0].trim(); //aaaaaa
@@ -122,7 +122,7 @@ public static class SwitchMapper extends Mapper<LongWritable, Text, Text, Text >
 		else {
 			context.write(new Text(shortest), new Text(""));
 			context.write(new Text(middle), new Text(""));
-		}*/
+		}
 
 	} // map
 } // MyMapperClass
