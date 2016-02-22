@@ -18,6 +18,10 @@ index:
 	javac -cp hadoop-core-1.2.1.jar invertedIndex.java 
 	jar cvfm index.jar manifest4.txt *.class
 
+mixture:
+	javac -cp hadoop-core-1.2.1.jar mixture.java 
+	jar cvfm mixture.jar manifest5.txt *.class
+
 get:
 	hadoop fs -get /user/bsugiart/test/output output
 
