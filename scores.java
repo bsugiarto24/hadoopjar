@@ -39,8 +39,6 @@ public class scores {
 	public static void main(String[] args) {
 		
 		try {
-			//Scanner scan = new Scanner(new File(args[0]));
-			
 			// step 1: get a new MapReduce Job object
 			Job  job = Job.getInstance();  //  job = new Job() is now deprecated
 			 
@@ -48,7 +46,7 @@ public class scores {
 			job.setJarByClass(scores.class);  
 			
 			//  step 3:  Set Input and Output files
-			FileInputFormat.addInputPath(job, new Path("prog3.txt")); // put what you need as input file
+			FileInputFormat.addInputPath(job, new Path(args[0])); // put what you need as input file
 			FileOutputFormat.setOutputPath(job, new Path("./test/","output")); // put what you need as output file
 			
 			// step 4:  Register mapper and reducer
