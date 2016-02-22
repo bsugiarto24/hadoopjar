@@ -81,10 +81,13 @@ public static class SwitchMapper extends Mapper<LongWritable, Text, Text, Text >
 	 
 		String str =  value.toString();
 		String text[] = str.split(",");
+		text[0] = text[0].trim();
+		text[1] = text[1].trim();
+		text[2] = text[2].trim();
 		
-		String shortest = text[0].trim(); //aaaaaa
-		String middle = text[1].trim();   //aaaa
-		String longest = text[2].trim();  //aa
+		String shortest = text[0]; //aaaaaa
+		String middle = text[1];   //aaaa
+		String longest = text[2];  //aa
 		String temp = "";
 		
 		
@@ -114,8 +117,16 @@ public static class SwitchMapper extends Mapper<LongWritable, Text, Text, Text >
 		
 		//emit pairs
 		if(longest.length() > middle.length()) {
-			context.write(new Text(shortest), new Text(longest));
-			context.write(new Text(middle), new Text(longest));
+			
+			if(text[0].length() < longest.length())
+				context.write(new Text(text[0]), new Text(longest));
+			else
+				context.write(new Text(text[0]), new Text(""));
+			
+			if(text[1].length() < longest.length())
+				context.write(new Text(text[1]), new Text(longest));
+			else
+				context.write(new Text(text[1]), new Text(""));
 		}
 		//emit just the word
 		else {
