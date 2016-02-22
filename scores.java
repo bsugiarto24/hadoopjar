@@ -32,7 +32,7 @@ import java.util.Scanner;
 
 
 
-//problem 1
+//problem 3
 public class scores {
 	
 	

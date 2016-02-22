@@ -2,13 +2,6 @@
 //CSC 369: Distributed Computing
 //Bryan Sugiarto
 
-//Java Hadoop Template
-
-//Section 1: Imports
-
-
-//Data containers for Map() and Reduce() functions
-//You would import the data types needed for your keys and values
 import org.apache.hadoop.io.IntWritable; 	// Hadoop's serialized int wrapper class
 import org.apache.hadoop.io.LongWritable; 	// Hadoop's serialized int wrapper class
 import org.apache.hadoop.io.Text;        	// Hadoop's serialized String wrapper class
@@ -37,9 +30,6 @@ public class repeatLetters {
 	public static void main(String[] args) {
 		
 		try {
-			//Scanner scan = new Scanner(new File(args[0]));
-			
-			// step 1: get a new MapReduce Job object
 			Job  job = Job.getInstance();  //  job = new Job() is now deprecated
 			 
 			// step 2: register the MapReduce class

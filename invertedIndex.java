@@ -1,16 +1,7 @@
 
-	    //		
-
 //CSC 369: Distributed Computing
 //Bryan Sugiarto
 
-//Java Hadoop Template
-
-//Section 1: Imports
-
-
-//Data containers for Map() and Reduce() functions
-//You would import the data types needed for your keys and values
 import org.apache.hadoop.io.IntWritable; 	// Hadoop's serialized int wrapper class
 import org.apache.hadoop.io.LongWritable; 	// Hadoop's serialized int wrapper class
 import org.apache.hadoop.io.Text;        	// Hadoop's serialized String wrapper class
@@ -34,15 +25,13 @@ import java.util.Scanner;
 
 
 
-//problem 1
+//problem 4
 public class invertedIndex {
 	
 	
 	public static void main(String[] args) {
 		
 		try {
-			//Scanner scan = new Scanner(new File(args[0]));
-			
 			// step 1: get a new MapReduce Job object
 			Job  job = Job.getInstance();  //  job = new Job() is now deprecated
 			 
@@ -50,7 +39,7 @@ public class invertedIndex {
 			job.setJarByClass(invertedIndex.class);  
 			
 			//  step 3:  Set Input and Output files
-			FileInputFormat.addInputPath(job, new Path("prog4.txt")); // put what you need as input file
+			FileInputFormat.addInputPath(job, new Path(args[0])); // put what you need as input file
 			FileOutputFormat.setOutputPath(job, new Path("./test/","output")); // put what you need as output file
 			
 			// step 4:  Register mapper and reducer
