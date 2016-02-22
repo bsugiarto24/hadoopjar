@@ -1,0 +1,3 @@
+band, brand, stubble
+brand, rattles, door
+band, door, structure
