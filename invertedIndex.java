@@ -134,7 +134,7 @@ public static class SwitchReducer extends  Reducer< Text, Text, Text, Text> {
 		}
 		
 		distinct = arr.size();	
-		context.write(key, new Text(count + ", "+ distinct + arr.toString()));
+		context.write(key, new Text(count + ", "+ distinct + ", " + arr.toString()));
 	 } 
 } // reducer
 
