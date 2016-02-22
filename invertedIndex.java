@@ -28,6 +28,8 @@ import org.apache.hadoop.fs.Path;                				// Hadoop's implementation 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
 
 
@@ -77,7 +79,7 @@ public class invertedIndex {
 
 //Mapper  Class Template
 	// Need to replace the four type labels there with actual Java class names
-public static class SwitchMapper extends Mapper<LongWritable, Text, LongWritable, Text > {
+public static class SwitchMapper extends Mapper<LongWritable, Text, Text, Text > {
 
 //@Override   // we are overriding Mapper's map() method
 //map methods takes three input parameters
@@ -88,26 +90,25 @@ public static class SwitchMapper extends Mapper<LongWritable, Text, LongWritable
 	public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException 
 	{
 	 
-		String str =  value.toString().toLowerCase();
-				 
-		for (int i = 0; i < str.length() - 1; i++) { 	
-		  	//there is a double
-			if (str.charAt(i) == str.charAt(i+1)) {
-		        //emit(str, str.charAt(i));
-				//LongWritable outKey = new LongWritable();
-				Text out = new Text(str);		          
-			      
-			    context.write(key, out);
-		        break;
-			} 
+		String str =  value.toString();
+		
+		Text out = new Text(str);	
+		
+		String text[] = str.split(" ");
+		
+		for(String word : text) {
+			context.write(new Text(word), new Text(key.toString()));
 		}
+	      
+	    
+		
 	} // map
 } // MyMapperClass
 
 
 //Reducer Class Template
 //needs to replace the four type labels with actual Java class names
-public static class SwitchReducer extends  Reducer< LongWritable, Text, Text, Text> {
+public static class SwitchReducer extends  Reducer< Text, Text, Text, Text> {
 
 // note: InValueType is a type of a single value Reducer will work with
 // the parameter to reduce() method will be Iterable<InValueType> - i.e. a list of these values
@@ -119,17 +120,21 @@ public static class SwitchReducer extends  Reducer< LongWritable, Text, Text, Te
 //second parameter: a list of values associated with the key
 //third parameter: container  for emitting output key-value pairs
 
-	public void reduce(LongWritable key, Iterable<Text> values, Context context) throws IOException, InterruptedException 
+	public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException 
 	{
 	
 		String str = "";
+		HashSet<String> arr = new HashSet<String>();
+		long count = 0, distinct = 0;
 		
 		for (Text val : values) {
 			str = val.toString();
+			arr.add(str);
+			count++;
 		}
 		
-		context.write(new Text(str), new Text(new StringBuilder(str).reverse().toString()));
-
+		distinct = arr.size();	
+		context.write(key, new Text(count + ", "+ distinct + arr.toString()));
 	 } 
 } // reducer
 
