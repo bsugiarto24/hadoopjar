@@ -1,0 +1,16 @@
+Bryan Sugiarto
+Program 6
+
+
+To Run:
+hadoop jar <jar name>
+
+
+The jars that are runnable are:
+repeat.jar
+invert.jar
+scores.jar
+index.jar
+mixture.jar
+
+That is the order of the problems
