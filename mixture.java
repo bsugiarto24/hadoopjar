@@ -124,6 +124,7 @@ public static class SwitchMapper extends Mapper<LongWritable, Text, Text, Text >
 				context.write(new Text(text[0]), new Text(""));
 			
 			if(text[1].length() < longest.length())
+				
 				context.write(new Text(text[1]), new Text(longest));
 			else
 				context.write(new Text(text[1]), new Text(""));
