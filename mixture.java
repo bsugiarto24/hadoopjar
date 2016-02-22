@@ -79,7 +79,8 @@ public static class SwitchMapper extends Mapper<LongWritable, Text, Text, Text >
 	public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException 
 	{
 	 
-		String str =  value.toString();
+		context.write(new Text(key.toString()), value);
+		/*String str =  value.toString();
 		String text[] = str.split(",");
 		
 		String shortest = text[0].trim(); //aaaaaa
@@ -121,7 +122,7 @@ public static class SwitchMapper extends Mapper<LongWritable, Text, Text, Text >
 		else {
 			context.write(new Text(shortest), new Text(""));
 			context.write(new Text(middle), new Text(""));
-		}
+		}*/
 
 	} // map
 } // MyMapperClass
@@ -140,7 +141,7 @@ public static class SwitchReducer extends  Reducer< Text, Text, Text, Text> {
 	public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException 
 	{
 	
-		String str = "";
+		/*String str = "";
 		HashSet<String> arr = new HashSet<String>();
 		long count = 0, distinct = 0;
 		
@@ -155,8 +156,11 @@ public static class SwitchReducer extends  Reducer< Text, Text, Text, Text> {
 				if(!word.equals(""))
 					context.write(key, new Text(word));
 			}	
-		}
+		}*/
 		
+		for (Text val : values) {
+			context.write(key, val);
+		}
 
 	 } 
 } // reducer
