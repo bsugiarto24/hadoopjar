@@ -169,9 +169,6 @@ public static class SwitchReducer extends  Reducer< Text, Text, Text, Text> {
 			}	
 		}
 		
-		/*for (Text val : values) {
-			context.write(key, val);
-		}*/
 
 	 } 
 } // reducer

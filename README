@@ -3,7 +3,7 @@ Program 6
 
 
 To Run:
-hadoop jar <jar name>
+hadoop jar <jar name> <input textfile>
 
 
 The jars that are runnable are:
@@ -13,4 +13,10 @@ scores.jar
 index.jar
 mixture.jar
 
-That is the order of the problems
+That is the order of the problems.
+The files for the programs for the textfile are
+prog1.txt
+prog1.txt
+prog3.txt
+prog4.txt
+prog5.txt
