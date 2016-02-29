@@ -25,7 +25,7 @@ histogram:
 	jar cvfm histogram.jar manifest6.txt *.class
 		
 make runhistogram:
-	hadoop jar job.jar MultilineJsonJob -libjars org.json-20120521.jar,json-mapreduce-1.0.jar test/test.json test/output/
+	hadoop jar histogram.jar MultilineJsonJob -libjars org.json-20120521.jar,json-mapreduce-1.0.jar test/test.json test/output/
 
 get:
 	hadoop fs -get /user/bsugiart/test/output output
