@@ -24,7 +24,7 @@ histogram:
 	javac -cp hadoop-core-1.2.1.jar histogram.java 
 	jar cvfm histogram.jar manifest6.txt *.class
 		
-run histogram:
+make runhistogram:
 	hadoop jar job.jar MultilineJsonJob -libjars org.json-20120521.jar,json-mapreduce-1.0.jar test/test.json test/output/
 
 get:
