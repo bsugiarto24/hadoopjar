@@ -21,7 +21,7 @@ mixture:
 	jar cvfm mixture.jar manifest5.txt *.class
 	
 histogram:
-	javac -cp hadoop-core-1.2.1.jar -cp org.json-20120521.jar histogram.java 
+	javac -cp \* histogram.java
 	jar cvfm histogram.jar manifest6.txt *.class
 		
 make runhistogram:
