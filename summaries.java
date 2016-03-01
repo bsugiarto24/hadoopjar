@@ -54,7 +54,7 @@ public class summaries extends Configured implements Tool {
     		 context.write(new Text(game + ""), new Text("user: " + json.getString("user") ));
     		 
     		 if(type.equals("gameEnd")) {	 
-    			 context.write(new Text(game + ""), new Text("status: " + action.getString("status") ));
+    			 context.write(new Text(game + ""), new Text("status: " + action.getString("gameStatus") ));
     		 }
     	 }
     	 
@@ -90,8 +90,7 @@ public class summaries extends Configured implements Tool {
 					points += Integer.parseInt(input.substring(input.lastIndexOf(' ')).trim());
 				}	
 				
-				if(val.toString().contains("status")){
-					context.write(key, new Text(val.toString()));	
+				if(val.toString().contains("status:")){
 					String input = val.toString();
 					outcome = input.substring(input.lastIndexOf(' ')).trim();
 				}	
