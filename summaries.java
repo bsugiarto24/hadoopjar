@@ -38,7 +38,7 @@ public class summaries extends Configured implements Tool {
         throws IOException, InterruptedException {
      try { 
     	 JSONObject json = new JSONObject(value.toString());
-    	 context.write(new Text("" + json.getInt("idea")), outputValue);
+    	 context.write(new Text("Idea"), outputValue);
 
     } catch (Exception e) {System.out.println(e); }
     }
