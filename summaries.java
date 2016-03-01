@@ -27,18 +27,17 @@ import com.alexholmes.json.mapreduce.MultiLineJsonInputFormat;
 
 public class summaries extends Configured implements Tool {
 
-  public static class JsonMapper
-      extends Mapper<LongWritable, Text, Text, Text> {
+  public static class JsonMapper extends Mapper<LongWritable, Text, Text, Text> {
 
     private Text    outputKey   = new Text();
     private Text 	outputValue	= new Text();
 
     @Override
-    public void map(LongWritable key, Text value, Context context)
-        throws IOException, InterruptedException {
+    public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
      try { 
     	 JSONObject json = new JSONObject(value.toString());
     	 int game = json.getInt("game");
+    	 context.write(new Text(game + ""), new Text("user: " + json.getString("user") ));
     	 
     	 JSONObject action = json.getJSONObject("action");
     	
@@ -85,9 +84,12 @@ public class summaries extends Configured implements Tool {
 				special++;
 			if(val.toString().equals("special"))
 				special++;
+			if(val.toString().contains("user"))
+				context.write(key, new Text(val.toString()));
 			  
 		}
-			context.write(key, new Text("regular: " + regular));
+		
+		context.write(key, new Text("regular: " + regular));
 	}
 }
 
@@ -100,7 +102,7 @@ public class summaries extends Configured implements Tool {
     job.setMapperClass(JsonMapper.class);
     job.setReducerClass(JsonReducer.class);
     job.setOutputKeyClass(Text.class);
-    job.setOutputValueClass(IntWritable.class);
+    job.setOutputValueClass(Text.class);
     job.setInputFormatClass(MultiLineJsonInputFormat.class);
     MultiLineJsonInputFormat.setInputJsonMember(job, "game");
 
