@@ -1,4 +1,3 @@
-package hadoopjar;
 
 import java.io.File;
 import java.io.FileNotFoundException;
