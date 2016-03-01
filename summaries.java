@@ -25,7 +25,7 @@ import org.json.JSONObject;
 
 import com.alexholmes.json.mapreduce.MultiLineJsonInputFormat;
 
-public class histogram extends Configured implements Tool {
+public class summaries extends Configured implements Tool {
 
   public static class JsonMapper
       extends Mapper<LongWritable, Text, Text, IntWritable> {
@@ -37,8 +37,8 @@ public class histogram extends Configured implements Tool {
     public void map(LongWritable key, Text value, Context context)
         throws IOException, InterruptedException {
      try { 
-    	 JSONObject json = new JSONObject(value.toString()).getJSONObject("action").getJSONObject("location");
-    	 context.write(new Text("("+ json.getInt("x") + "," + json.getInt("y") + ")"), outputValue);
+    	 JSONObject json = new JSONObject(value.toString());
+    	 context.write(new Text(json.getString("text")), outputValue);
 
     } catch (Exception e) {System.out.println(e); }
     }
@@ -65,7 +65,7 @@ public class histogram extends Configured implements Tool {
     Configuration conf = super.getConf();
     Job job = Job.getInstance(conf, "multiline json job");
 
-    job.setJarByClass(histogram.class);
+    job.setJarByClass(summaries.class);
     job.setMapperClass(JsonMapper.class);
     job.setReducerClass(JsonReducer.class);
     job.setOutputKeyClass(Text.class);
@@ -81,7 +81,7 @@ public class histogram extends Configured implements Tool {
 
   public static void main(String[] args) throws Exception {
     Configuration conf = new Configuration();
-    int res = ToolRunner.run(conf, new histogram(), args);
+    int res = ToolRunner.run(conf, new summaries(), args);
     System.exit(res);
   }
 }
