@@ -28,37 +28,67 @@ import com.alexholmes.json.mapreduce.MultiLineJsonInputFormat;
 public class summaries extends Configured implements Tool {
 
   public static class JsonMapper
-      extends Mapper<LongWritable, Text, Text, IntWritable> {
+      extends Mapper<LongWritable, Text, Text, Text> {
 
-    private Text        outputKey   = new Text();
-    private IntWritable outputValue = new IntWritable(1);
+    private Text    outputKey   = new Text();
+    private Text 	outputValue	= new Text();
 
     @Override
     public void map(LongWritable key, Text value, Context context)
         throws IOException, InterruptedException {
      try { 
     	 JSONObject json = new JSONObject(value.toString());
-    	 context.write(new Text("Idea"), outputValue);
-
+    	 int game = json.getInt("game");
+    	 
+    	 JSONObject action = json.getJSONObject("action");
+    	
+    	 if(action != null){
+    		 String type = action.getString("actionType");
+        	 
+    		 if(type.equals("Move"))
+    			 context.write(new Text(game + ""), new Text("regular"));
+    		 if(type.equals("SpecialMove"))
+    			 context.write(new Text(game + ""), new Text("special"));
+    		 
+    		 context.write(new Text(game + ""), new Text("points: " + action.getInt("pointsAdded") ));
+    		 context.write(new Text(game + ""), new Text("move: " + action.getInt("actionNumber") ));
+    		 context.write(new Text(game + ""), new Text("user: " + json.getString("user") ));
+    		 
+    		 if(type.equals("gameEnd")) {	 
+    			 context.write(new Text(game + ""), new Text("status: " + action.getString("status") ));
+    		 }
+    	 }
+    	 
+  
+    	 
+    	 
+    	 
     } catch (Exception e) {System.out.println(e); }
     }
   }
 
   public static class JsonReducer
-      extends Reducer<Text, IntWritable, Text, IntWritable> {
-    private IntWritable result = new IntWritable();
+      extends Reducer<Text, Text, Text, Text> {
+    private Text result = new Text();
 
     @Override
-    public void reduce(Text key, Iterable<IntWritable> values, Context context)
-        throws IOException, InterruptedException {
-      int sum = 0;
-      for (IntWritable val : values) {
-        sum += val.get();
-      }
-      result.set(sum);
-      context.write(key, result);
-    }
-  }
+    public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
+      
+		JSONObject summary = new JSONObject(); 	
+		    	
+		int regular, special, points = 0;
+		for (Text val : values) {
+			if(val.toString().equals("regular"))
+				regular++;
+			if(val.toString().equals("special"))
+				special++;
+			if(val.toString().equals("special"))
+				special++;
+			  
+		}
+			context.write(key, new Text("regular: " + regular));
+	}
+}
 
   @Override
   public int run(String[] args) throws Exception {
@@ -71,7 +101,7 @@ public class summaries extends Configured implements Tool {
     job.setOutputKeyClass(Text.class);
     job.setOutputValueClass(IntWritable.class);
     job.setInputFormatClass(MultiLineJsonInputFormat.class);
-    MultiLineJsonInputFormat.setInputJsonMember(job, "messageId");
+    MultiLineJsonInputFormat.setInputJsonMember(job, "game");
 
     FileInputFormat.addInputPath(job, new Path(args[0]));
     FileOutputFormat.setOutputPath(job, new Path(args[1]));
