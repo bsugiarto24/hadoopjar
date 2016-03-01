@@ -54,7 +54,7 @@ public class summaries extends Configured implements Tool {
 			 context.write(new Text(game + ""), new Text("points: " + action.getInt("pointsAdded") ));
 			 context.write(new Text(game + ""), new Text("move: " + action.getInt("actionNumber") ));
 		 }else {
-			 context.write(new Text(game + ""), new Text("status: " + action.toString() ));
+			 context.write(new Text(game + ""), new Text("status: " + action.getString("gameStatus") ));
 		 }
 
     } catch (Exception e) {System.out.println(e); }
