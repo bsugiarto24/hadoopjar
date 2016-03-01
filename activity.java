@@ -36,8 +36,8 @@ public class activity extends Configured implements Tool {
     public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
      try { 
     	 JSONObject json = new JSONObject(value.toString());
-    	 int game = json.getInt("game");
-    	 context.write(new Text(game + ""), new Text("user: " + json.getString("user") ));
+    	 String user = json.getString("user");
+    	 
     	 
     	 JSONObject action = json.getJSONObject("action");
     	
@@ -54,7 +54,7 @@ public class activity extends Configured implements Tool {
     		 context.write(new Text(game + ""), new Text("user: " + json.getString("user") ));
     		 
     		 if(type.equals("gameEnd")) {	 
-    			 context.write(new Text(game + ""), new Text("status: " + action.getString("status") ));
+    			 context.write(new Text(user), new Text("status: " + action.getString("status") ));
     		 }
     	 }
     	 
@@ -104,6 +104,16 @@ public class activity extends Configured implements Tool {
 			summary.put("outcome", outcome);
 			summary.put("score", points);
 			summary.put("perMove", (double) points / (special + regular));
+			
+			/*
+			 * {
+				"games": <gamesPlayed>,
+				"won": <gamesWon>,
+				"lost": <gamesLost>,
+				"highscore": <highestGameEndScore>,
+				"longestGame": <largestNMoves>
+			   }
+			 */
 			
 			context.write(key, new Text(summary.toString(2)));	
     	}catch(Exception e) {

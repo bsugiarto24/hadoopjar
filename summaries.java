@@ -90,7 +90,8 @@ public class summaries extends Configured implements Tool {
 					points += Integer.parseInt(input.substring(input.lastIndexOf(' ')).trim());
 				}	
 				
-				if(val.toString().contains("status:")){
+				if(val.toString().contains("status")){
+					context.write(new Text("key"), new Text("value"));
 					String input = val.toString();
 					outcome = input.substring(input.lastIndexOf(' ')).trim();
 				}	
