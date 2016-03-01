@@ -40,26 +40,23 @@ public class summaries extends Configured implements Tool {
     	 context.write(new Text(game + ""), new Text("user: " + json.getString("user") ));
     	 
     	 JSONObject action = json.getJSONObject("action");
-    	
-    	 if(action != null){
-    		 String type = action.getString("actionType");
-        	 
-    		 if(type.equals("Move"))
-    			 context.write(new Text(game + ""), new Text("regular"));
-    		 if(type.equals("SpecialMove"))
-    			 context.write(new Text(game + ""), new Text("special"));
-    		 
-    		 context.write(new Text(game + ""), new Text("points: " + action.getInt("pointsAdded") ));
-    		 context.write(new Text(game + ""), new Text("move: " + action.getInt("actionNumber") ));
-    		 context.write(new Text(game + ""), new Text("user: " + json.getString("user") ));
-    		 
-    		 context.write(new Text(game + ""), new Text("status: " + action.toString() ));
-    		 
-    		 if(type.equals("gameEnd")) {	 
-    			 
-    		 }
-    	 }
+
+		 String type = action.getString("actionType");
     	 
+		 if(type.equals("Move")) {
+			 context.write(new Text(game + ""), new Text("regular"));
+			 context.write(new Text(game + ""), new Text("points: " + action.getInt("pointsAdded") ));
+			 context.write(new Text(game + ""), new Text("move: " + action.getInt("actionNumber") ));
+			 
+		 }
+		 else if(type.equals("SpecialMove")){
+			 context.write(new Text(game + ""), new Text("special"));
+			 context.write(new Text(game + ""), new Text("points: " + action.getInt("pointsAdded") ));
+			 context.write(new Text(game + ""), new Text("move: " + action.getInt("actionNumber") ));
+		 }else {
+			 context.write(new Text(game + ""), new Text("status: " + action.toString() ));
+		 }
+
     } catch (Exception e) {System.out.println(e); }
     }
   }
