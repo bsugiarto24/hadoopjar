@@ -28,6 +28,9 @@ summaries:
 	javac -cp \* summaries.java
 	jar cvfm summaries.jar manifest7.txt *.class
 
+activity:
+	javac -cp \* activity.java
+	jar cvfm activity.jar manifest8.txt *.class
 		
 run:
 	echo "hadoop jar histogram.jar MultilineJsonJob -libjars org.json-20120521.jar,json-mapreduce-1.0.jar test/test.json test/output/"
