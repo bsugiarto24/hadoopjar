@@ -71,27 +71,32 @@ public class activity extends Configured implements Tool {
       
     	try {
 			JSONObject summary = new JSONObject(); 												
-			int highscore = 0, win = 0, loss = 0, longestGame;
-			String user = "", outcome = "In Progress";
+			int highscore = 0, win = 0, start = 0, loss = 0, longestGame = 0;
 			
 			for (Text val : values) {
 				if(val.toString().equals("won"))
 					win++;
+				if(val.toString().equals("start"))
+					start++;
 				if(val.toString().equals("Loss"))
 					loss++;
 				if(val.toString().contains("moves")){
 					String input = val.toString();
-					int points = Integer.parseInt(input.substring(input.lastIndexOf(' ')).trim());
+					int moves = Integer.parseInt(input.substring(input.lastIndexOf(' ')).trim());
+					
+					if(moves > longestGame)
+						longestGame = moves;
 				}
-
-				if(val.toString().contains("status")){
-					context.write(key, new Text(val.toString()));	
+				if(val.toString().contains("points")){
 					String input = val.toString();
-					outcome = input.substring(input.lastIndexOf(' ')).trim();
+					int points = Integer.parseInt(input.substring(input.lastIndexOf(' ')).trim());
+					
+					if(points > highscore)
+						highscore = points;
 				}	
 			}
 		
-			summary.put("games", user);
+			summary.put("games", start);
 			summary.put("won", win);
 			summary.put("lost", loss);
 			summary.put("highscore", highscore);
