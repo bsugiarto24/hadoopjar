@@ -37,15 +37,8 @@ public class histogram extends Configured implements Tool {
     public void map(LongWritable key, Text value, Context context)
         throws IOException, InterruptedException {
      try { 
-      JSONObject json = new JSONObject(value.toString());
-      Iterator<String> iter = json.keys();
-      while (iter.hasNext()) {
-        String jsonKey = iter.next();
-        if ("yes".equals(json.getString(jsonKey))) {
-          outputKey.set(jsonKey);
-          context.write(outputKey, outputValue);
-        } //if
-      }   // while 
+    	 JSONObject json = new JSONObject(value.toString()).getJSONObject("location");
+    	 context.write(json.getInt("x") + "," + json.getInt("y") , 1);
 
     } catch (Exception e) {System.out.println(e); }
     }
