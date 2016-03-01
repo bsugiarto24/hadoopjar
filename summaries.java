@@ -71,7 +71,7 @@ public class summaries extends Configured implements Tool {
     job.setOutputKeyClass(Text.class);
     job.setOutputValueClass(IntWritable.class);
     job.setInputFormatClass(MultiLineJsonInputFormat.class);
-    MultiLineJsonInputFormat.setInputJsonMember(job, "game");
+    MultiLineJsonInputFormat.setInputJsonMember(job, "messageId");
 
     FileInputFormat.addInputPath(job, new Path(args[0]));
     FileOutputFormat.setOutputPath(job, new Path(args[1]));
