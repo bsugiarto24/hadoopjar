@@ -66,8 +66,8 @@ public class activity extends Configured implements Tool {
 			int highscore = 0, win = 0, start = 0, loss = 0, longestGame = 0;
 			
 			for (Text val : values) {
-				context.write(key, val);
-				if(val.toString().equals("won"))
+				//context.write(key, val);
+				if(val.toString().equals("win"))
 					win++;
 				if(val.toString().equals("start"))
 					start++;
