@@ -25,7 +25,7 @@ import org.json.JSONObject;
 
 import com.alexholmes.json.mapreduce.MultiLineJsonInputFormat;
 
-public class summaries extends Configured implements Tool {
+public class activity extends Configured implements Tool {
 
   public static class JsonMapper extends Mapper<LongWritable, Text, Text, Text> {
 
@@ -116,7 +116,7 @@ public class summaries extends Configured implements Tool {
     Configuration conf = super.getConf();
     Job job = Job.getInstance(conf, "multiline json job");
 
-    job.setJarByClass(summaries.class);
+    job.setJarByClass(activity.class);
     job.setMapperClass(JsonMapper.class);
     job.setReducerClass(JsonReducer.class);
     job.setOutputKeyClass(Text.class);
@@ -132,7 +132,7 @@ public class summaries extends Configured implements Tool {
 
   public static void main(String[] args) throws Exception {
     Configuration conf = new Configuration();
-    int res = ToolRunner.run(conf, new summaries(), args);
+    int res = ToolRunner.run(conf, new activity(), args);
     System.exit(res);
   }
 }
