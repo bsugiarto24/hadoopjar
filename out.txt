@@ -1,0 +1,1018 @@
+[
+{
+  "game": 1,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u6973"
+},
+{
+  "game": 2,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u3000"
+},
+{
+  "game": 3,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u1378"
+},
+{
+  "game": 4,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u9762"
+},
+{
+  "game": 5,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u9885"
+},
+{
+  "game": 6,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u277"
+},
+{
+  "game": 7,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u8431"
+},
+{
+  "game": 8,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u500"
+},
+{
+  "game": 9,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u5256"
+},
+{
+  "game": 10,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u9046"
+},
+{
+  "game": 11,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u1777"
+},
+{
+  "game": 12,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u1727"
+},
+{
+  "game": 13,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u3503"
+},
+{
+  "game": 14,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u6551"
+},
+{
+  "game": 15,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u5196"
+},
+{
+  "game": 16,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u4340"
+},
+{
+  "game": 16,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": -1,
+    "actionNumber": 2,
+    "location": {
+      "x": 9,
+      "y": 14
+    },
+    "points": -1
+  },
+  "user": "u4340"
+},
+{
+  "game": 17,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u3076"
+},
+{
+  "game": 18,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u4162"
+},
+{
+  "game": 19,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u7057"
+},
+{
+  "game": 20,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u9873"
+},
+{
+  "game": 21,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u9234"
+},
+{
+  "game": 5,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": 20,
+    "actionNumber": 2,
+    "location": {
+      "x": 12,
+      "y": 15
+    },
+    "points": 20
+  },
+  "user": "u9885"
+},
+{
+  "game": 22,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u3304"
+},
+{
+  "game": 5,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": -5,
+    "actionNumber": 3,
+    "location": {
+      "x": 7,
+      "y": 7
+    },
+    "points": 15
+  },
+  "user": "u9885"
+},
+{
+  "game": 23,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u6278"
+},
+{
+  "game": 19,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": 10,
+    "actionNumber": 2,
+    "location": {
+      "x": 13,
+      "y": 15
+    },
+    "points": 10
+  },
+  "user": "u7057"
+},
+{
+  "game": 3,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": -8,
+    "actionNumber": 2,
+    "location": {
+      "x": 12,
+      "y": 17
+    },
+    "points": -8
+  },
+  "user": "u1378"
+},
+{
+  "game": 24,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u5233"
+},
+{
+  "game": 14,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": 14,
+    "actionNumber": 2,
+    "location": {
+      "x": 11,
+      "y": 6
+    },
+    "points": 14
+  },
+  "user": "u6551"
+},
+{
+  "game": 25,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u4275"
+},
+{
+  "game": 26,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u8679"
+},
+{
+  "game": 27,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u4630"
+},
+{
+  "game": 28,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u1532"
+},
+{
+  "game": 29,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u9934"
+},
+{
+  "game": 10,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": 4,
+    "actionNumber": 2,
+    "location": {
+      "x": 4,
+      "y": 10
+    },
+    "points": 4
+  },
+  "user": "u9046"
+},
+{
+  "game": 30,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u724"
+},
+{
+  "game": 31,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u3559"
+},
+{
+  "game": 32,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u6571"
+},
+{
+  "game": 33,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u6912"
+},
+{
+  "game": 34,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u9405"
+},
+{
+  "game": 35,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u2841"
+},
+{
+  "game": 6,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": -5,
+    "actionNumber": 2,
+    "location": {
+      "x": 12,
+      "y": 15
+    },
+    "points": -5
+  },
+  "user": "u277"
+},
+{
+  "game": 4,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": 13,
+    "actionNumber": 2,
+    "location": {
+      "x": 1,
+      "y": 4
+    },
+    "points": 13
+  },
+  "user": "u9762"
+},
+{
+  "game": 32,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": 18,
+    "actionNumber": 2,
+    "location": {
+      "x": 6,
+      "y": 8
+    },
+    "points": 18
+  },
+  "user": "u6571"
+},
+{
+  "game": 36,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u6743"
+},
+{
+  "game": 37,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u2971"
+},
+{
+  "game": 38,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u6230"
+},
+{
+  "game": 19,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": 5,
+    "actionNumber": 3,
+    "location": {
+      "x": 9,
+      "y": 4
+    },
+    "points": 15
+  },
+  "user": "u7057"
+},
+{
+  "game": 1,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": 19,
+    "actionNumber": 2,
+    "location": {
+      "x": 14,
+      "y": 9
+    },
+    "points": 19
+  },
+  "user": "u6973"
+},
+{
+  "game": 39,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u4657"
+},
+{
+  "game": 1,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": 1,
+    "actionNumber": 3,
+    "location": {
+      "x": 8,
+      "y": 12
+    },
+    "points": 20
+  },
+  "user": "u6973"
+},
+{
+  "game": 2,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": -19,
+    "actionNumber": 2,
+    "location": {
+      "x": 18,
+      "y": 13
+    },
+    "points": -19
+  },
+  "user": "u3000"
+},
+{
+  "game": 40,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u54"
+},
+{
+  "game": 38,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": 2,
+    "actionNumber": 2,
+    "location": {
+      "x": 2,
+      "y": 4
+    },
+    "points": 2
+  },
+  "user": "u6230"
+},
+{
+  "game": 41,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u9651"
+},
+{
+  "game": 32,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": 15,
+    "actionNumber": 3,
+    "location": {
+      "x": 16,
+      "y": 9
+    },
+    "points": 33
+  },
+  "user": "u6571"
+},
+{
+  "game": 26,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": 1,
+    "actionNumber": 2,
+    "location": {
+      "x": 18,
+      "y": 16
+    },
+    "points": 1
+  },
+  "user": "u8679"
+},
+{
+  "game": 22,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": -4,
+    "actionNumber": 2,
+    "location": {
+      "x": 12,
+      "y": 18
+    },
+    "points": -4
+  },
+  "user": "u3304"
+},
+{
+  "game": 42,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u883"
+},
+{
+  "game": 43,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u182"
+},
+{
+  "game": 44,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u7545"
+},
+{
+  "game": 45,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u8516"
+},
+{
+  "game": 4,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": -19,
+    "actionNumber": 3,
+    "location": {
+      "x": 10,
+      "y": 9
+    },
+    "points": -6
+  },
+  "user": "u9762"
+},
+{
+  "game": 46,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u3072"
+},
+{
+  "game": 47,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u6428"
+},
+{
+  "game": 48,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u5666"
+},
+{
+  "game": 15,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": 4,
+    "actionNumber": 2,
+    "location": {
+      "x": 15,
+      "y": 17
+    },
+    "points": 4
+  },
+  "user": "u5196"
+},
+{
+  "game": 45,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": -2,
+    "actionNumber": 2,
+    "location": {
+      "x": 15,
+      "y": 10
+    },
+    "points": -2
+  },
+  "user": "u8516"
+},
+{
+  "game": 36,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": 20,
+    "actionNumber": 2,
+    "location": {
+      "x": 15,
+      "y": 4
+    },
+    "points": 20
+  },
+  "user": "u6743"
+},
+{
+  "game": 49,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u845"
+},
+{
+  "game": 13,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": 20,
+    "actionNumber": 2,
+    "location": {
+      "x": 9,
+      "y": 4
+    },
+    "points": 20
+  },
+  "user": "u3503"
+},
+{
+  "game": 50,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u9048"
+},
+{
+  "game": 28,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": 9,
+    "actionNumber": 2,
+    "location": {
+      "x": 6,
+      "y": 15
+    },
+    "points": 9
+  },
+  "user": "u1532"
+},
+{
+  "game": 41,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": 13,
+    "actionNumber": 2,
+    "location": {
+      "x": 4,
+      "y": 6
+    },
+    "points": 13
+  },
+  "user": "u9651"
+},
+{
+  "game": 51,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u8993"
+},
+{
+  "game": 17,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": 1,
+    "actionNumber": 2,
+    "location": {
+      "x": 6,
+      "y": 17
+    },
+    "points": 1
+  },
+  "user": "u3076"
+},
+{
+  "game": 52,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u7159"
+},
+{
+  "game": 48,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": 9,
+    "actionNumber": 2,
+    "location": {
+      "x": 18,
+      "y": 1
+    },
+    "points": 9
+  },
+  "user": "u5666"
+},
+{
+  "game": 53,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u9879"
+},
+{
+  "game": 37,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": -11,
+    "actionNumber": 2,
+    "location": {
+      "x": 12,
+      "y": 7
+    },
+    "points": -11
+  },
+  "user": "u2971"
+},
+{
+  "game": 54,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u5830"
+},
+{
+  "game": 55,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u1349"
+},
+{
+  "game": 37,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": 7,
+    "actionNumber": 3,
+    "location": {
+      "x": 11,
+      "y": 18
+    },
+    "points": -4
+  },
+  "user": "u2971"
+},
+{
+  "game": 56,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u2624"
+},
+{
+  "game": 57,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u2153"
+},
+{
+  "game": 58,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u4420"
+},
+{
+  "game": 3,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": 14,
+    "actionNumber": 3,
+    "location": {
+      "x": 16,
+      "y": 1
+    },
+    "points": 6
+  },
+  "user": "u1378"
+},
+{
+  "game": 59,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u3599"
+},
+{
+  "game": 60,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u9324"
+},
+{
+  "game": 61,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u3986"
+},
+{
+  "game": 14,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": -14,
+    "actionNumber": 3,
+    "location": {
+      "x": 15,
+      "y": 5
+    },
+    "points": 0
+  },
+  "user": "u6551"
+},
+{
+  "game": 62,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u6219"
+},
+{
+  "game": 59,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": -14,
+    "actionNumber": 2,
+    "location": {
+      "x": 9,
+      "y": 17
+    },
+    "points": -14
+  },
+  "user": "u3599"
+},
+{
+  "game": 63,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u3023"
+},
+{
+  "game": 10,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": -2,
+    "actionNumber": 3,
+    "location": {
+      "x": 17,
+      "y": 5
+    },
+    "points": 2
+  },
+  "user": "u9046"
+},
+{
+  "game": 64,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u7799"
+},
+{
+  "game": 39,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": -14,
+    "actionNumber": 2,
+    "location": {
+      "x": 6,
+      "y": 4
+    },
+    "points": -14
+  },
+  "user": "u4657"
+},
+{
+  "game": 43,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": 1,
+    "actionNumber": 2,
+    "location": {
+      "x": 13,
+      "y": 4
+    },
+    "points": 1
+  },
+  "user": "u182"
+},
+{
+  "game": 33,
+  "action": {
+    "actionType": "Move",
+    "pointsAdded": 8,
+    "actionNumber": 2,
+    "location": {
+      "x": 7,
+      "y": 3
+    },
+    "points": 8
+  },
+  "user": "u6912"
+}
+]
