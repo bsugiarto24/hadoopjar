@@ -54,7 +54,7 @@ public class activity extends Configured implements Tool {
     		 context.write(new Text(game + ""), new Text("user: " + json.getString("user") ));
     		 
     		 if(type.equals("gameEnd")) {	 
-    			 context.write(new Text(user), new Text("status: " + action.getString("gameStatus") ));
+    			 context.write(new Text(user), new Text(action.getString("gameStatus") ));
     		 }
     	 }
     	 
