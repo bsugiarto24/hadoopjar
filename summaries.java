@@ -79,8 +79,6 @@ public class summaries extends Configured implements Tool {
 					regular++;
 				if(val.toString().equals("special"))
 					special++;
-				if(val.toString().equals("special"))
-					special++;
 				if(val.toString().contains("user")){
 					String input = val.toString();
 					user = input.substring(input.lastIndexOf('u'));
