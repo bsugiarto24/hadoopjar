@@ -76,7 +76,8 @@ public class summaries extends Configured implements Tool {
       
 		JSONObject summary = new JSONObject(); 	
 		    	
-		int regular, special, points = 0;
+		int regular = 0, special = 0, points = 0;
+		
 		for (Text val : values) {
 			if(val.toString().equals("regular"))
 				regular++;
