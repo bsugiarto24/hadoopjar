@@ -23,9 +23,13 @@ mixture:
 histogram:
 	javac -cp \* histogram.java
 	jar cvfm histogram.jar manifest6.txt *.class
+	
+summaries:
+	javac -cp \* summaries.java
+	jar cvfm summaries.jar manifest7.txt *.class
 		
-make runhistogram:
-	hadoop jar histogram.jar MultilineJsonJob -libjars org.json-20120521.jar,json-mapreduce-1.0.jar test/test.json test/output/
+run:
+	echo "hadoop jar histogram.jar MultilineJsonJob -libjars org.json-20120521.jar,json-mapreduce-1.0.jar test/test.json test/output/"
 
 get:
 	hadoop fs -get /user/bsugiart/test/output output
