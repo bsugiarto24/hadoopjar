@@ -53,7 +53,7 @@ public class summaries extends Configured implements Tool {
     		 context.write(new Text(game + ""), new Text("move: " + action.getInt("actionNumber") ));
     		 context.write(new Text(game + ""), new Text("user: " + json.getString("user") ));
     		 
-    		 context.write(new Text(game + ""), new Text("status: " + action.getString("gameStatus") ));
+    		 context.write(new Text(game + ""), new Text("status: " + action.toString() ));
     		 
     		 if(type.equals("gameEnd")) {	 
     			 
