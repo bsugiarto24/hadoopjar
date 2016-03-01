@@ -37,26 +37,18 @@ public class activity extends Configured implements Tool {
      try { 
     	 JSONObject json = new JSONObject(value.toString());
     	 String user = json.getString("user");
-    	 
-    	 
     	 JSONObject action = json.getJSONObject("action");
-    	
-    	 if(action != null){
-    		 String type = action.getString("actionType");
-        	 
-    		 if(type.equals("Move"))
-    			 context.write(new Text(game + ""), new Text("regular"));
-    		 if(type.equals("SpecialMove"))
-    			 context.write(new Text(game + ""), new Text("special"));
-    		 
-    		 context.write(new Text(game + ""), new Text("points: " + action.getInt("pointsAdded") ));
-    		 context.write(new Text(game + ""), new Text("move: " + action.getInt("actionNumber") ));
-    		 context.write(new Text(game + ""), new Text("user: " + json.getString("user") ));
-    		 
-    		 if(type.equals("gameEnd")) {	 
-    			 context.write(new Text(user), new Text(action.getString("gameStatus") ));
-    		 }
-    	 }
+		 String type = action.getString("actionType");
+    	 
+		 if(type.equals("gameStart")) {	 
+			 context.write(new Text(user), new Text("start"));
+		 }
+		 
+		 if(type.equals("gameEnd")) {	 
+			 context.write(new Text(user), new Text(action.getString("gameStatus") ));
+			 context.write(new Text(user), new Text("moves: " + action.getInt("actionNumber") ));
+			 context.write(new Text(user), new Text("points: " + action.getInt("points") ));
+		 }
     	 
     } catch (Exception e) {System.out.println(e); }
     }
@@ -74,6 +66,7 @@ public class activity extends Configured implements Tool {
 			int highscore = 0, win = 0, start = 0, loss = 0, longestGame = 0;
 			
 			for (Text val : values) {
+				context.write(key, val);
 				if(val.toString().equals("won"))
 					win++;
 				if(val.toString().equals("start"))

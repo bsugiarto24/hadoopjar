@@ -74,8 +74,7 @@ public class summaries extends Configured implements Tool {
 			String user = "", outcome = "In Progress";
 			
 			for (Text val : values) {
-				
-				context.write(key, val);
+				//context.write(key, val);
 				if(val.toString().equals("regular"))
 					regular++;
 				if(val.toString().equals("special"))
