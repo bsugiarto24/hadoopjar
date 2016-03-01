@@ -75,6 +75,8 @@ public class summaries extends Configured implements Tool {
 			String user = "", outcome = "In Progress";
 			
 			for (Text val : values) {
+				
+				context.write(key, val);
 				if(val.toString().equals("regular"))
 					regular++;
 				if(val.toString().equals("special"))
@@ -90,8 +92,8 @@ public class summaries extends Configured implements Tool {
 					points += Integer.parseInt(input.substring(input.lastIndexOf(' ')).trim());
 				}	
 				
-				if(val.toString().contains("status")){
-					context.write(new Text("key"), new Text("value"));
+				if(val.toString().contains("status:")){
+					
 					String input = val.toString();
 					outcome = input.substring(input.lastIndexOf(' ')).trim();
 				}	
