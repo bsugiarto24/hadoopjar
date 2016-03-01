@@ -58,10 +58,6 @@ public class summaries extends Configured implements Tool {
     		 }
     	 }
     	 
-  
-    	 
-    	 
-    	 
     } catch (Exception e) {System.out.println(e); }
     }
   }
@@ -76,6 +72,7 @@ public class summaries extends Configured implements Tool {
 		JSONObject summary = new JSONObject(); 	
 		    	
 		int regular = 0, special = 0, points = 0;
+		String user = "", outcome = "In Progress";
 		
 		for (Text val : values) {
 			if(val.toString().equals("regular"))
@@ -84,12 +81,25 @@ public class summaries extends Configured implements Tool {
 				special++;
 			if(val.toString().equals("special"))
 				special++;
-			if(val.toString().contains("user"))
-				context.write(key, new Text(val.toString()));
-			  
+			if(val.toString().contains("user")){
+				String input = val.toString();
+				user = input.substring(input.lastIndexOf('u'));
+			}
+			if(val.toString().contains("points")){
+				String input = val.toString();
+				points += Integer.parseInt(input.substring(input.lastIndexOf(' ')).trim());
+			}	
 		}
 		
-		context.write(key, new Text("regular: " + regular));
+		summary.put("user", user);
+		summary.put("moves", special + regular);
+		summary.put("regular", regular);
+		summary.put("special", special);
+		summary.put("outcome", outcome);
+		summary.put("score", points);
+		summary.put("perMove", (double) points / (special + regular));
+		
+		context.write(key, new Text(summary.toString(2)));
 	}
 }
 
