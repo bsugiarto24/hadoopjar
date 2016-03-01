@@ -91,6 +91,7 @@ public class summaries extends Configured implements Tool {
 				}	
 				
 				if(val.toString().contains("status")){
+					context.write(key, new Text(val.toString()));	
 					String input = val.toString();
 					outcome = input.substring(input.lastIndexOf(' ')).trim();
 				}	
