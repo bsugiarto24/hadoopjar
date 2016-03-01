@@ -1,8 +1,8 @@
-[
 {
-  "messageId": 1,
-},
-{
-  "messageId": 2
+  "game": 1,
+  "action": {
+    "actionType": "gameStart",
+    "actionNumber": 1
+  },
+  "user": "u6973"
 }
-]
