@@ -38,6 +38,9 @@ clean:
 	hadoop fs -rm -r /user/bsugiart/test/output
 	rm -r output
 	
+replace:
+	hadoop fs -rm thot.txt
+	hadoop fs -put thot.txt
 
 show:
 	cat output/part-r-00000 
