@@ -71,7 +71,7 @@ public class activity extends Configured implements Tool {
       
     	try {
 			JSONObject summary = new JSONObject(); 												
-			int regular = 0, special = 0, points = 0;
+			int highscore = 0, special = 0;
 			String user = "", outcome = "In Progress";
 			
 			for (Text val : values) {
@@ -86,8 +86,11 @@ public class activity extends Configured implements Tool {
 					user = input.substring(input.lastIndexOf('u'));
 				}
 				if(val.toString().contains("points")){
-					String input = val.toString();
-					points += Integer.parseInt(input.substring(input.lastIndexOf(' ')).trim());
+					int points = Integer.parseInt(input.substring(input.lastIndexOf(' ')).trim());
+					
+					if(points > highscore)
+						highscore = points;
+					
 				}	
 				
 				if(val.toString().contains("status")){
@@ -97,13 +100,11 @@ public class activity extends Configured implements Tool {
 				}	
 			}
 		
-			summary.put("user", user);
-			summary.put("moves", special + regular);
-			summary.put("regular", regular);
-			summary.put("special", special);
-			summary.put("outcome", outcome);
-			summary.put("score", points);
-			summary.put("perMove", (double) points / (special + regular));
+			summary.put("games", user);
+			summary.put("won", special + regular);
+			summary.put("lost", regular);
+			summary.put("highscore", special);
+			summary.put("longestGame", outcome);
 			
 			/*
 			 * {
