@@ -1,16 +1,8 @@
 [
 {
   "messageId": 1,
-  "recepient": "u5664",
-  "text": " public waited affects cessation although cousins simplicity",
-  "user": "u2723",
-  "status": "public"
 },
 {
-  "messageId": 2,
-  "recepient": "subscribers",
-  "text": " hopes useful powerful turning mortification Lodging pin Harry veracity enraged harp find several",
-  "user": "u5664",
-  "status": "public"
+  "messageId": 2
 }
 ]
