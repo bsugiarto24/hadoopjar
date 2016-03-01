@@ -71,28 +71,19 @@ public class activity extends Configured implements Tool {
       
     	try {
 			JSONObject summary = new JSONObject(); 												
-			int highscore = 0, special = 0;
+			int highscore = 0, win = 0, loss = 0, longestGame;
 			String user = "", outcome = "In Progress";
 			
 			for (Text val : values) {
-				if(val.toString().equals("regular"))
-					regular++;
-				if(val.toString().equals("special"))
-					special++;
-				if(val.toString().equals("special"))
-					special++;
-				if(val.toString().contains("user")){
+				if(val.toString().equals("won"))
+					win++;
+				if(val.toString().equals("Loss"))
+					loss++;
+				if(val.toString().contains("moves")){
 					String input = val.toString();
-					user = input.substring(input.lastIndexOf('u'));
-				}
-				if(val.toString().contains("points")){
 					int points = Integer.parseInt(input.substring(input.lastIndexOf(' ')).trim());
-					
-					if(points > highscore)
-						highscore = points;
-					
-				}	
-				
+				}
+
 				if(val.toString().contains("status")){
 					context.write(key, new Text(val.toString()));	
 					String input = val.toString();
@@ -101,10 +92,10 @@ public class activity extends Configured implements Tool {
 			}
 		
 			summary.put("games", user);
-			summary.put("won", special + regular);
-			summary.put("lost", regular);
-			summary.put("highscore", special);
-			summary.put("longestGame", outcome);
+			summary.put("won", win);
+			summary.put("lost", loss);
+			summary.put("highscore", highscore);
+			summary.put("longestGame", longestGame);
 			
 			/*
 			 * {
