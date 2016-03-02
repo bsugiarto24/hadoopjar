@@ -46,6 +46,11 @@ replace:
 	hadoop fs -rm thot.txt
 	hadoop fs -put thot.txt
 
+seq:
+	javac -cp \* *.java
+	java -cp .:\* befuddledGen
+	java -cp .:\* histogramSeq
+
 show:
 	cat output/part-r-00000 
 	
