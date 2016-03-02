@@ -21,9 +21,11 @@ public class beFuddledGen {
 	
 	public static void main(String[] args) {
 		int NUMBEROFGAMES = 20;
-		int obj = 50000;
-		String file = "out50000.txt";
+		int obj = 100;
+		String file = "out.txt";
 		
+		System.out.println("obj: " + obj);
+
 		try {
 			
 			JSONArray log = new JSONArray();
