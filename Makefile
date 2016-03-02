@@ -48,7 +48,7 @@ replace:
 
 seq:
 	javac -cp \* *.java
-	java -cp .:\* befuddledGen
+	java -cp .:\* beFuddledGen
 	java -cp .:\* histogramSeq
 
 show:
