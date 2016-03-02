@@ -50,6 +50,9 @@ seq:
 	javac -cp \* *.java
 	java -cp .:\* beFuddledGen
 	java -cp .:\* histogramSeq
+	hadoop fs -rm out.txt
+	hadoop fs -put out.txt
+	hadoop jar histogram.jar -libjars org.json-20120521.jar,json-mapreduce-1.0.jar test/out.txt test/output/
 
 show:
 	cat output/part-r-00000 
