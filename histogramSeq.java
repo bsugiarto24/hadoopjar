@@ -15,7 +15,10 @@ public class histogramSeq {
 		HashMap<String, Integer> locs = new HashMap<String, Integer>();
 		
 		long start = System.currentTimeMillis();
+
 		JSONTokener t;
+		JSONParser parser;
+		
 		try {
 			t = new JSONTokener(new FileReader(new File(file)));
 			JSONArray arr = new JSONArray(t);
