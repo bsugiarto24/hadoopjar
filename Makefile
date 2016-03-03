@@ -31,6 +31,10 @@ summaries:
 activity:
 	javac -cp \* activity.java
 	jar cvfm activity.jar manifest8.txt *.class
+
+example:
+	javac -cp \* example.java
+	jar cvfm example.jar manifest9.txt *.class
 		
 run:
 	echo "hadoop jar histogram.jar MultilineJsonJob -libjars org.json-20120521.jar,json-mapreduce-1.0.jar test/test.json test/output/"
