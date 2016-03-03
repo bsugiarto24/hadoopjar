@@ -21,7 +21,7 @@ public class beFuddledGen {
 	
 	public static void main(String[] args) {
 		int NUMBEROFGAMES = 20;
-		int obj = 1000;
+		int obj = 10000;
 		String file = "out.txt";
 		
 		System.out.println("obj: " + obj);
