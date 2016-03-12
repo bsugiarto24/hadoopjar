@@ -35,9 +35,13 @@ activity:
 example:
 	javac -cp \* example.java
 	jar cvfm example.jar manifest9.txt *.class
-		
+
+powerdays:
+	javac -cp \* PowerDays.java
+	jar cvfm powerdays.jar manifestpowerdays.txt *.class		
+
 run:
-	echo "hadoop jar histogram.jar MultilineJsonJob -libjars org.json-20120521.jar,json-mapreduce-1.0.jar test/test.json test/output/"
+	@echo "hadoop jar histogram.jar MultilineJsonJob -libjars org.json-20120521.jar,json-mapreduce-1.0.jar test/test.json test/output/"
 
 get:
 	hadoop fs -get /user/bsugiart/test/output output
