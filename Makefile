@@ -48,9 +48,11 @@ get:
 
 clean:
 	hadoop fs -rm -r /user/bsugiart/test/output
-	hadoop fs -rm -r /user/bsugiart/test/temp
 	rm -r output
 	
+rmtemp:
+	hadoop fs -rm -r /user/bsugiart/test/temp
+
 replace:
 	hadoop fs -rm thot.txt
 	hadoop fs -put thot.txt
