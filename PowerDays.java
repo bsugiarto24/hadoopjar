@@ -26,39 +26,42 @@ import java.util.Scanner;
 //problem 5
 public class PowerDays {
 	
-	
-	public static void main(String[] args) {
-		
+	public static void main(String[] args) {	
 		try {
-			//Scanner scan = new Scanner(new File(args[0]));
 			
-			// step 1: get a new MapReduce Job object
-			Job  job = Job.getInstance();  //  job = new Job() is now deprecated
-			 
-			// step 2: register the MapReduce class
+			Job  job = Job.getInstance();
 			job.setJarByClass(PowerDays.class);  
-			
-			//  step 3:  Set Input and Output files
 			FileInputFormat.addInputPath(job, new Path("/datasets/household_power_consumption.txt")); // put what you need as input file
-			FileOutputFormat.setOutputPath(job, new Path("./test/","output")); // put what you need as output file
-			
-			// step 4:  Register mapper and reducer
+			FileOutputFormat.setOutputPath(job, new Path("./test/","temp")); // put what you need as output file
 			job.setMapperClass(SwitchMapper.class);
 			job.setReducerClass(SwitchReducer.class);
-			  
-			//  step 5: Set up output information
+			 
 			job.setMapOutputKeyClass(Text.class);
 			job.setMapOutputValueClass(Text.class);
 			job.setOutputKeyClass(Text.class); // specify the output class (what reduce() emits) for key
 			job.setOutputValueClass(Text.class); // specify the output class (what reduce() emits) for value
+
+			job.setJobName("Power Days");
 			
-			// step 6: Set up other job parameters at will
-			job.setJobName("Program 5");
 			
-			// step 7:  ?
+			job.waitForCompletion(true);
 			
-			// step 8: profit
-			System.exit(job.waitForCompletion(true) ? 0:1);
+			
+			/*Job  job2 = Job.getInstance();
+			job2.setJarByClass(PowerDays.class);  
+			FileInputFormat.addInputPath(job2, new Path("./test/temp")); // put what you need as input file
+			FileOutputFormat.setOutputPath(job2, new Path("./test/","output")); // put what you need as output file
+			job2.setMapperClass(SwitchMapper2.class);
+			job2.setReducerClass(SwitchReducer2.class);
+			 
+			job2.setMapOutputKeyClass(Text.class);
+			job2.setMapOutputValueClass(Text.class);
+			job2.setOutputKeyClass(Text.class); // specify the output class (what reduce() emits) for key
+			job2.setOutputValueClass(Text.class); // specify the output class (what reduce() emits) for value
+
+			job.setJobName("Power Days2");
+			
+			System.exit(job2.waitForCompletion(true) ? 0:1);*/
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -67,114 +70,92 @@ public class PowerDays {
 
 
 //Mapper  Class Template
-	// Need to replace the four type labels there with actual Java class names
 public static class SwitchMapper extends Mapper<LongWritable, Text, Text, Text > {
 
-//@Override   // we are overriding Mapper's map() method
-//map methods takes three input parameters
-//first parameter: input key 
-//second parameter: input value
-//third parameter: container for emitting output key-value pairs
-
+	@Override
 	public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException 
 	{
 	 
 		String str =  value.toString();
-		String text[] = str.split(",");
-		text[0] = text[0].trim();
-		text[1] = text[1].trim();
-		text[2] = text[2].trim();
-		
-		String shortest = text[0]; //aaaaaa
-		String middle = text[1];   //aaaa
-		String longest = text[2];  //aa
-		String temp = "";
+		String text[] = str.split(";");
 		
 		
-		//swap middle and longest
-		if(longest.length() < middle.length()) {
-			temp = longest;
-			longest = middle;
-			middle = temp;
-		}
+		double energy = Double.parseDouble(text[3]) *1000 / 60;
+		double sub1 = Double.parseDouble(text[6]);
+		double sub2 = Double.parseDouble(text[7]);
+		double sub3 = Double.parseDouble(text[8]);
 		
-		//swap middle and shortest
-		if(middle.length() < shortest.length()) {
-			temp = shortest;
-			shortest = middle;
-			middle = temp;
-		}
+		energy = energy - sub1 - sub2 - sub3;
 		
-		//swap middle and longest
-		if(longest.length() < middle.length()) {
-			temp = longest;
-			longest = middle;
-			middle = temp;
-		}
+		//map date and energy
+		context.write(new Text(text[0]), new Text("" + energy));
 		
-		//emit largest
-		context.write(new Text(longest), new Text(""));
-		
-		//emit pairs
-		if(longest.length() > middle.length()) {
-			
-			if(text[0].length() < longest.length())
-				context.write(new Text(text[0]), new Text(longest));
-			else
-				context.write(new Text(text[0]), new Text(""));
-			
-			if(text[1].length() < longest.length())
-				
-				context.write(new Text(text[1]), new Text(longest));
-			else
-				context.write(new Text(text[1]), new Text(""));
-		}
-		//emit just the word
-		else {
-			context.write(new Text(shortest), new Text(""));
-			context.write(new Text(middle), new Text(""));
-		}
-
 	} // map
 } // MyMapperClass
 
 
 //Reducer Class Template
-//needs to replace the four type labels with actual Java class names
 public static class SwitchReducer extends  Reducer< Text, Text, Text, Text> {
 
-// note: InValueType is a type of a single value Reducer will work with
-// the parameter to reduce() method will be Iterable<InValueType> - i.e. a list of these values
-
-@Override  // we are overriding the Reducer's reduce() method
-
-
+	@Override  
 	public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException 
 	{
-	
-		String str = "";
-		HashSet<String> arr = new HashSet<String>();
-		long count = 0, distinct = 0;
-		
+		//get total
+		double total = 0;
 		for (Text val : values) {
-			str = val.toString();
-			arr.add(str);
-			count++;
+			String str = val.toString();
+			total += Double.parseDouble(str);
 		}
 		
-		if(count > 1) {
-			for(String word : arr) {
-				if(!word.equals(""))
-					context.write(key, new Text(word));
-			}	
-		}
+		//get year
+		String str =  key.toString();
+		String text[] = str.split("/");
 		
 
+		//map year and total energy
+		context.write(new Text(text[2]), new Text("" + total));
 	 } 
 } // reducer
 
 
-} // MyMapReduceDriver
+//Mapper  Class Template
+public static class SwitchMapper2 extends Mapper<LongWritable, Text, Text, Text > {
+
+	@Override
+	public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException 
+	{
+	 
+		String str =  value.toString();
+		String text[] = str.split(" ");
+		context.write(new Text(text[0]), new Text(text[1]));
+		
+	} // map
+} // MyMapperClass
+
+
+//Reducer Class Template
+public static class SwitchReducer2 extends  Reducer< Text, Text, Text, Text> {
+
+	@Override  
+	public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException 
+	{
+		//get max
+		double max = 0;
+		for (Text val : values) {
+			String str = val.toString();
+			double individual =  Double.parseDouble(str);
+			if(max < individual)
+				max = individual;
+		}
+		
+		//map year and total energy
+		context.write(key, new Text("" + max));
+	 } 
+} // reducer
+
+
+
+} 
 
 
 
