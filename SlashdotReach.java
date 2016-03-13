@@ -27,8 +27,7 @@ import java.util.Scanner;
 public class SlashdotReach {
 	
 	public static void main(String[] args) {	
-		try {
-			
+		try {	
 			Job  job = Job.getInstance();
 			job.setJarByClass(SlashdotReach.class);  
 			//FileInputFormat.addInputPath(job, new Path("/datasets/household_power_consumption.txt")); 

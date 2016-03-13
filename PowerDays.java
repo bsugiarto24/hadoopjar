@@ -29,7 +29,7 @@ public class PowerDays {
 	public static void main(String[] args) {	
 		try {
 			
-			Job  job = Job.getInstance();
+			/*Job  job = Job.getInstance();
 			job.setJarByClass(PowerDays.class);  
 			//FileInputFormat.addInputPath(job, new Path("/datasets/household_power_consumption.txt")); 
 			FileInputFormat.addInputPath(job, new Path("./power.txt")); 
@@ -43,14 +43,12 @@ public class PowerDays {
 			job.setOutputValueClass(Text.class); // specify the output class (what reduce() emits) for value
 
 			job.setJobName("Power Days");
-			
-			
-			job.waitForCompletion(true);
+			job.waitForCompletion(true);*/
 			
 			
 			Job  job2 = Job.getInstance();
 			job2.setJarByClass(PowerDays.class);  
-			FileInputFormat.addInputPath(job2, new Path("./test/temp")); // put what you need as input file
+			FileInputFormat.addInputPath(job2, new Path("./test/temp/part-r-00000")); // put what you need as input file
 			FileOutputFormat.setOutputPath(job2, new Path("./test/","output")); // put what you need as output file
 			job2.setMapperClass(SwitchMapper2.class);
 			job2.setReducerClass(SwitchReducer2.class);
@@ -60,7 +58,7 @@ public class PowerDays {
 			job2.setOutputKeyClass(Text.class); // specify the output class (what reduce() emits) for key
 			job2.setOutputValueClass(Text.class); // specify the output class (what reduce() emits) for value
 
-			job.setJobName("Power Days2");
+			job2.setJobName("Power Days2");
 			
 			System.exit(job2.waitForCompletion(true) ? 0:1);
 			
