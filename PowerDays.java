@@ -48,7 +48,7 @@ public class PowerDays {
 			job.waitForCompletion(true);
 			
 			
-			/*Job  job2 = Job.getInstance();
+			Job  job2 = Job.getInstance();
 			job2.setJarByClass(PowerDays.class);  
 			FileInputFormat.addInputPath(job2, new Path("./test/temp")); // put what you need as input file
 			FileOutputFormat.setOutputPath(job2, new Path("./test/","output")); // put what you need as output file
@@ -62,7 +62,7 @@ public class PowerDays {
 
 			job.setJobName("Power Days2");
 			
-			System.exit(job2.waitForCompletion(true) ? 0:1);*/
+			System.exit(job2.waitForCompletion(true) ? 0:1);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
