@@ -123,11 +123,11 @@ public static class SwitchMapper2 extends Mapper<LongWritable, Text, Text, Text 
 	@Override
 	public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException 
 	{
-		context.write(value, value);
+		//context.write(value, value);
 	 
 		String str =  value.toString();
 		String text[] = str.split(" ");
-		//context.write(new Text(text[0]), new Text(text[1]));
+		context.write(new Text(text[0]), new Text(text[1]));
 		
 	} // map
 } // MyMapperClass
