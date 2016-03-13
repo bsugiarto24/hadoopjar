@@ -45,6 +45,9 @@ run:
 
 get:
 	hadoop fs -get /user/bsugiart/test/output output
+	
+gettemp:
+	hadoop fs -get /user/bsugiart/test/temp temp
 
 clean:
 	hadoop fs -rm -r /user/bsugiart/test/output
@@ -67,6 +70,9 @@ seq:
 
 show:
 	cat output/part-r-00000 
+	
+showtemp:
+	cat temp/part-r-00000 
 	
 pull:
 	git pull
