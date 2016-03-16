@@ -78,7 +78,7 @@ public static class SwitchMapper extends Mapper<LongWritable, Text, Text, Text >
 		try{
 			String str =  value.toString();
 			
-			if(str.indexOf('0') != -1 || str.indexOf('?') != -1){
+			if(str.indexOf('0') != -1 && str.indexOf('?') != -1){
 			
 				String text[] = str.split(";");
 				
