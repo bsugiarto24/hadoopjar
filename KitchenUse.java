@@ -89,9 +89,16 @@ public static class SwitchMapper extends Mapper<LongWritable, Text, Text, Text >
 				
 				long t = d.getTime();
 			
-				Date after =new Date(t + (5 * 60000));
+				Date after;
 				
 				context.write(new Text(d.toString()), new Text("" + energy));
+				after =new Date(t + (1 * 60000));
+				context.write(new Text(after.toString()), new Text("" + energy));
+				after =new Date(t + (2 * 60000));
+				context.write(new Text(after.toString()), new Text("" + energy));
+				after =new Date(t + (3 * 60000));
+				context.write(new Text(after.toString()), new Text("" + energy));
+				after =new Date(t + (4 * 60000));
 				context.write(new Text(after.toString()), new Text("" + energy));
 			}
 		}catch(Exception e){}
@@ -108,21 +115,16 @@ public static class SwitchReducer extends  Reducer< Text, Text, DoubleWritable, 
 	{
 		
 		int count = 0;
-		double val1 = 0, val2 = 0;
+		double total = 0;
 		
 		for(Text txt : values) {
 			String str  = txt.toString();
 			
-			if(count == 0)
-				val1 = Double.parseDouble(str);
-			else
-				val2 = Double.parseDouble(str);
+			total += Double.parseDouble(str);
 			count ++;
 		}
 		
-		double diff = Math.abs(val1 - val2);
-		
-		context.write(new DoubleWritable(diff), key);
+		context.write(new DoubleWritable(total), key);
 	 } 
 } // reducer
 
