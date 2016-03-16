@@ -7,6 +7,6 @@ jar cvf powercomp.jar *.class
 hadoop fs -rm -r /user/bsugiart/test
 rm -r output
 hadoop jar powercomp.jar PowerComp
-hadoop fs -cat test/output/part-r-00000 
-
+hadoop fs -get test/output/part-r-00000 output.txt
+head -20 output.txt
 
