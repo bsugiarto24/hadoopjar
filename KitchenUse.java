@@ -11,7 +11,6 @@ import org.apache.hadoop.mapreduce.Mapper; 	// Mapper class to be extended by ou
 import org.apache.hadoop.mapreduce.Reducer; // Reducer class to be extended by our Reduce function
 import org.apache.hadoop.mapreduce.Job; 	// the MapReduce job class that is used a the driver
 
-
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;	// class for "pointing" at input file(s)
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat; // class for "pointing" at output file
 import org.apache.hadoop.fs.Path;                				// Hadoop's implementation of directory path/filename
@@ -20,35 +19,18 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Scanner;
 
 //problem 5
-public class PowerDays {
+public class KitchenUse {
 	
 	public static void main(String[] args) {	
-		try {
-			
-			Job  job = Job.getInstance();
-			job.setJarByClass(PowerDays.class);  
-			FileInputFormat.addInputPath(job, new Path("/datasets/household_power_consumption.txt")); 
-			//FileInputFormat.addInputPath(job, new Path("./power.txt")); 
-			FileOutputFormat.setOutputPath(job, new Path("./test/","temp")); // put what you need as output file
-			job.setMapperClass(SwitchMapper.class);
-			job.setReducerClass(SwitchReducer.class);
-			 
-			job.setMapOutputKeyClass(Text.class);
-			job.setMapOutputValueClass(Text.class);
-			job.setOutputKeyClass(Text.class); // specify the output class (what reduce() emits) for key
-			job.setOutputValueClass(Text.class); // specify the output class (what reduce() emits) for value
-
-			job.setJobName("Power Days");
-			job.waitForCompletion(true);
-			
-			
+		try {		
 			Job  job2 = Job.getInstance();
-			job2.setJarByClass(PowerDays.class);  
-			FileInputFormat.addInputPath(job2, new Path("./test/temp/part-r-00000")); // put what you need as input file
+			job2.setJarByClass(KitchenUse.class);  
+			FileInputFormat.addInputPath(job2, new Path("/datasets/household_power_consumption.txt")); // put what you need as input file
 			FileOutputFormat.setOutputPath(job2, new Path("./test/","output")); // put what you need as output file
 			job2.setMapperClass(SwitchMapper2.class);
 			job2.setReducerClass(SwitchReducer2.class);
@@ -56,9 +38,11 @@ public class PowerDays {
 			job2.setMapOutputKeyClass(Text.class);
 			job2.setMapOutputValueClass(Text.class);
 			job2.setOutputKeyClass(Text.class); // specify the output class (what reduce() emits) for key
-			job2.setOutputValueClass(Text.class); // specify the output class (what reduce() emits) for value
-
-			job2.setJobName("Power Days2");
+			job2.setOutputValueClass(Text.class); // specify the output class (what reduce() emits) for value			
+			
+			job2.setJobName("Kitchen Use");
+			
+			job2.setSortComparatorClass(LongWritable.DecreasingComparator.class);
 			
 			System.exit(job2.waitForCompletion(true) ? 0:1);
 			
@@ -84,35 +68,57 @@ public static class SwitchMapper extends Mapper<LongWritable, Text, Text, Text >
 		double sub2 = Double.parseDouble(text[7]);
 		double sub3 = Double.parseDouble(text[8]);
 		
-		//energy = energy - sub1 - sub2 - sub3;
+		String date[] = text[0].split("/");
+		String time[] = text[1].split(":");
+		energy = sub1;
 		
 		//map date and energy
-		context.write(new Text(text[0]), new Text("" + energy));
+		//16/10/2007;02:26:00;
+		
+		Date d = new Date();
+		Integer.parseInt(time[1]);
+		d.setHours(Integer.parseInt(time[0]));
+		d.setMinutes(Integer.parseInt(time[1]));
+		
+		d.setMonth(Integer.parseInt(date[1]));
+		d.setDate(Integer.parseInt(date[0]));
+		d.setYear(Integer.parseInt(date[2]));
+		
+		
+		long t = d.getTime();
+	
+		Date after =new Date(t + (5 * 60000));
+		
+		context.write(new Text(d.toString()), new Text("" + energy));
+		context.write(new Text(after.toString()), new Text("" + energy));
 		
 	} // map
 } // MyMapperClass
 
 
 //Reducer Class Template
-public static class SwitchReducer extends  Reducer< Text, Text, Text, Text> {
+public static class SwitchReducer extends  Reducer< Text, Text, Text, Double> {
 
 	@Override  
 	public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException 
 	{
-		//get total
-		double total = 0;
-		for (Text val : values) {
-			String str = val.toString();
-			total += Double.parseDouble(str);
+		
+		int count = 0;
+		double val1 = 0, val2 = 0;
+		
+		for(Text txt : values) {
+			String str  = txt.toString();
+			
+			if(count == 0)
+				val1 = Double.parseDouble(str);
+			else
+				val2 = Double.parseDouble(str);
+			count ++;
 		}
 		
-		//get year
-		String str =  key.toString();
-		String text[] = str.split("/");
+		double diff = Math.abs(val1 - val2);
 		
-
-		//map year and total energy
-		context.write(new Text(text[2]), new Text("" + total));
+		context.write(key, new Double(diff));
 	 } 
 } // reducer
 
@@ -155,11 +161,4 @@ public static class SwitchReducer2 extends  Reducer< Text, Text, Text, Text> {
 
 
 
-} 
-
-
-
-
-
-
-
+}

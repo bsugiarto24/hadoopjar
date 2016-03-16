@@ -1,10 +1,12 @@
 #!/bin/sh
 
 
-export HADOOP_CLASSPATH=/home/bsugiart/hadoopjar/json-mapreduce-1.0.jar
-make clean
-make summaries
-hadoop jar summaries.jar -libjars org.json-20120521.jar,json-mapreduce-1.0.jar example.txt test/output/
-make get
-make show
+#export HADOOP_CLASSPATH=/home/bsugiart/hadoopjar/json-mapreduce-1.0.jar
+javac -cp \* PowerDays.java
+jar cvfm powerdays.jar *.class	
+hadoop fs -rm -r /user/bsugiart/test/output
+rm -r output
+hadoop jar powerdays.jar PowerDays
+hadoop fs -cat test/output/part-r-00000 
+
 
