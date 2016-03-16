@@ -72,7 +72,7 @@ show:
 	cat output/part-r-00000 
 	
 showtemp:
-	cat temp/part-r-00000 
+	hadoop fs -cat test/temp/part-r-00000 
 	
 pull:
 	git pull

@@ -2,6 +2,7 @@
 //CSC 369: Distributed Computing
 //Bryan Sugiarto
 
+import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.IntWritable; 	// Hadoop's serialized int wrapper class
 import org.apache.hadoop.io.LongWritable; 	// Hadoop's serialized int wrapper class
 import org.apache.hadoop.io.Text;        	// Hadoop's serialized String wrapper class
@@ -98,7 +99,7 @@ public static class SwitchMapper extends Mapper<LongWritable, Text, Text, Text >
 
 
 //Reducer Class Template
-public static class SwitchReducer extends  Reducer< Text, Text, Text, Double> {
+public static class SwitchReducer extends  Reducer< Text, Text, DoubleWritable, Text> {
 
 	@Override  
 	public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException 
@@ -119,7 +120,7 @@ public static class SwitchReducer extends  Reducer< Text, Text, Text, Double> {
 		
 		double diff = Math.abs(val1 - val2);
 		
-		context.write(key, new Double(diff));
+		context.write(new DoubleWritable(diff), key);
 	 } 
 } // reducer
 
