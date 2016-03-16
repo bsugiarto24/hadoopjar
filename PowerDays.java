@@ -75,19 +75,24 @@ public static class SwitchMapper extends Mapper<LongWritable, Text, Text, Text >
 	public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException 
 	{
 	 
+		
 		String str =  value.toString();
-		String text[] = str.split(";");
 		
+		if(str.indexOf('0') != -1){
 		
-		double energy = Double.parseDouble(text[3]) *1000 / 60;
-		double sub1 = Double.parseDouble(text[6]);
-		double sub2 = Double.parseDouble(text[7]);
-		double sub3 = Double.parseDouble(text[8]);
-		
-		//energy = energy - sub1 - sub2 - sub3;
-		
-		//map date and energy
-		context.write(new Text(text[0]), new Text("" + energy));
+			String text[] = str.split(";");
+			
+			
+			double energy = Double.parseDouble(text[3]) *1000 / 60;
+			double sub1 = Double.parseDouble(text[6]);
+			double sub2 = Double.parseDouble(text[7]);
+			double sub3 = Double.parseDouble(text[8]);
+			
+			//energy = energy - sub1 - sub2 - sub3;
+			
+			//map date and energy
+			context.write(new Text(text[0]), new Text("" + energy));
+		}
 		
 	} // map
 } // MyMapperClass
