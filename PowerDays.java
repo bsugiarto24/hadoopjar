@@ -131,11 +131,10 @@ public static class SwitchMapper2 extends Mapper<LongWritable, Text, Text, Text 
 		//context.write(value, value);
 	 
 		String str =  value.toString();
-		String text[] = str.split(" ");
+		String text[] = str.split("\t");
 		
-		if(text.length > 1) {
-			context.write(new Text(text[0]), new Text(text[1]));
-		}	
+		context.write(new Text(text[0]), new Text(text[1]));
+	
 	} // map
 } // MyMapperClass
 
