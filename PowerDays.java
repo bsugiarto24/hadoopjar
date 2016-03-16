@@ -132,8 +132,10 @@ public static class SwitchMapper2 extends Mapper<LongWritable, Text, Text, Text 
 	 
 		String str =  value.toString();
 		String text[] = str.split(" ");
-		context.write(new Text(text[0]), new Text(text[1]));
 		
+		if(text.length > 1) {
+			context.write(new Text(text[0]), new Text(text[1]));
+		}	
 	} // map
 } // MyMapperClass
 
