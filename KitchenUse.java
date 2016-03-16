@@ -64,7 +64,7 @@ public static class SwitchMapper extends Mapper<LongWritable, Text, Text, Text >
 		String text[] = str.split(";");
 		
 		try {
-			if(str.indexOf('0') != -1 || str.indexOf('?') != -1){
+			if(str.indexOf('0') != -1 && str.indexOf('?') != -1){
 				double energy = Double.parseDouble(text[3]) *1000 / 60;
 				double sub1 = Double.parseDouble(text[6]);
 				double sub2 = Double.parseDouble(text[7]);
