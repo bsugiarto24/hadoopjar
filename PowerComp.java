@@ -78,20 +78,21 @@ public static class SwitchMapper extends Mapper<LongWritable, Text, Text, Text >
 		String str =  value.toString();
 		String text[] = str.split(";");
 		
-		
-		double energy = Double.parseDouble(text[3]) *1000 / 60;
-		double sub1 = Double.parseDouble(text[6]);
-		double sub2 = Double.parseDouble(text[7]);
-		double sub3 = Double.parseDouble(text[8]);
-		String flag = "";
-		
-		flag += (sub1 > 1)? "Y" : "N";
-		flag += (sub2 > 1)? "Y" : "N";
-		flag += (sub3 > 1)? "Y" : "N";
-		
-		
-		//map date and energy
-		context.write(new Text(text[0]), new Text(flag + ":" + energy));
+		if(str.indexOf('0') != -1){
+			double energy = Double.parseDouble(text[3]) *1000 / 60;
+			double sub1 = Double.parseDouble(text[6]);
+			double sub2 = Double.parseDouble(text[7]);
+			double sub3 = Double.parseDouble(text[8]);
+			String flag = "";
+			
+			flag += (sub1 > 1)? "Y" : "N";
+			flag += (sub2 > 1)? "Y" : "N";
+			flag += (sub3 > 1)? "Y" : "N";
+			
+			
+			//map date and energy
+			context.write(new Text(text[0]), new Text(flag + ":" + energy));
+		}
 		
 	} // map
 } // MyMapperClass
