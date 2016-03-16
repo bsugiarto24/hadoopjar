@@ -38,7 +38,7 @@ public class KitchenUse {
 			 
 			job2.setMapOutputKeyClass(Text.class);
 			job2.setMapOutputValueClass(Text.class);
-			job2.setOutputKeyClass(Text.class); // specify the output class (what reduce() emits) for key
+			job2.setOutputKeyClass(DoubleWritable.class); // specify the output class (what reduce() emits) for key
 			job2.setOutputValueClass(Text.class); // specify the output class (what reduce() emits) for value			
 			
 			job2.setJobName("Kitchen Use");
@@ -93,7 +93,8 @@ public static class SwitchMapper extends Mapper<LongWritable, Text, Text, Text >
 				
 				context.write(new Text(d.toString()), new Text("" + energy));
 				context.write(new Text(after.toString()), new Text("" + energy));
-			}catch(Exception e){}
+			}
+		}catch(Exception e){}
 		}
 		
 	} // map
