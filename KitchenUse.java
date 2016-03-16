@@ -32,8 +32,8 @@ public class KitchenUse {
 			job2.setJarByClass(KitchenUse.class);  
 			FileInputFormat.addInputPath(job2, new Path("/datasets/household_power_consumption.txt")); // put what you need as input file
 			FileOutputFormat.setOutputPath(job2, new Path("./test/","output")); // put what you need as output file
-			job2.setMapperClass(SwitchMapper2.class);
-			job2.setReducerClass(SwitchReducer2.class);
+			job2.setMapperClass(SwitchMapper.class);
+			job2.setReducerClass(SwitchReducer.class);
 			 
 			job2.setMapOutputKeyClass(Text.class);
 			job2.setMapOutputValueClass(Text.class);
@@ -121,44 +121,6 @@ public static class SwitchReducer extends  Reducer< Text, Text, Text, Double> {
 		context.write(key, new Double(diff));
 	 } 
 } // reducer
-
-
-//Mapper  Class Template
-public static class SwitchMapper2 extends Mapper<LongWritable, Text, Text, Text > {
-
-	@Override
-	public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException 
-	{
-		//context.write(value, value);
-	 
-		String str =  value.toString();
-		String text[] = str.split(" ");
-		context.write(new Text(text[0]), new Text(text[1]));
-		
-	} // map
-} // MyMapperClass
-
-
-//Reducer Class Template
-public static class SwitchReducer2 extends  Reducer< Text, Text, Text, Text> {
-
-	@Override  
-	public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException 
-	{
-		//get max
-		double max = 0;
-		for (Text val : values) {
-			String str = val.toString();
-			double individual =  Double.parseDouble(str);
-			if(max < individual)
-				max = individual;
-		}
-		
-		//map year and total energy
-		context.write(key, new Text("" + max));
-	 } 
-} // reducer
-
 
 
 }
