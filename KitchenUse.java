@@ -95,7 +95,6 @@ public static class SwitchMapper extends Mapper<LongWritable, Text, Text, Text >
 				context.write(new Text(after.toString()), new Text("" + energy));
 			}
 		}catch(Exception e){}
-		}
 		
 	} // map
 } // MyMapperClass
