@@ -75,24 +75,25 @@ public static class SwitchMapper extends Mapper<LongWritable, Text, Text, Text >
 	public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException 
 	{
 	 
-		
-		String str =  value.toString();
-		
-		if(str.indexOf('0') != -1){
-		
-			String text[] = str.split(";");
+		try{
+			String str =  value.toString();
 			
+			if(str.indexOf('0') != -1){
 			
-			double energy = Double.parseDouble(text[3]) *1000 / 60;
-			double sub1 = Double.parseDouble(text[6]);
-			double sub2 = Double.parseDouble(text[7]);
-			double sub3 = Double.parseDouble(text[8]);
-			
-			//energy = energy - sub1 - sub2 - sub3;
-			
-			//map date and energy
-			context.write(new Text(text[0]), new Text("" + energy));
-		}
+				String text[] = str.split(";");
+				
+				
+				double energy = Double.parseDouble(text[3]) *1000 / 60;
+				double sub1 = Double.parseDouble(text[6]);
+				double sub2 = Double.parseDouble(text[7]);
+				double sub3 = Double.parseDouble(text[8]);
+				
+				//energy = energy - sub1 - sub2 - sub3;
+				
+				//map date and energy
+				context.write(new Text(text[0]), new Text("" + energy));
+			}
+		}catch(Exception e){}
 		
 	} // map
 } // MyMapperClass
@@ -104,20 +105,22 @@ public static class SwitchReducer extends  Reducer< Text, Text, Text, Text> {
 	@Override  
 	public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException 
 	{
-		//get total
-		double total = 0;
-		for (Text val : values) {
-			String str = val.toString();
-			total += Double.parseDouble(str);
-		}
-		
-		//get year
-		String str =  key.toString();
-		String text[] = str.split("/");
-		
-
-		//map year and total energy
-		context.write(new Text(text[2]), new Text("" + total));
+		try {
+			//get total
+			double total = 0;
+			for (Text val : values) {
+				String str = val.toString();
+				total += Double.parseDouble(str);
+			}
+			
+			//get year
+			String str =  key.toString();
+			String text[] = str.split("/");
+			
+	
+			//map year and total energy
+			context.write(new Text(text[2]), new Text("" + total));
+		}catch(Exception e){}
 	 } 
 } // reducer
 
@@ -130,10 +133,12 @@ public static class SwitchMapper2 extends Mapper<LongWritable, Text, Text, Text 
 	{
 		//context.write(value, value);
 	 
-		String str =  value.toString();
-		String text[] = str.split("\t");
-		
-		context.write(new Text(text[0]), new Text(text[1]));
+		try{
+			String str =  value.toString();
+			String text[] = str.split("\t");
+			
+			context.write(new Text(text[0]), new Text(text[1]));
+		}catch(Exception e){}
 	
 	} // map
 } // MyMapperClass
@@ -145,17 +150,19 @@ public static class SwitchReducer2 extends  Reducer< Text, Text, Text, Text> {
 	@Override  
 	public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException 
 	{
-		//get max
-		double max = 0;
-		for (Text val : values) {
-			String str = val.toString();
-			double individual =  Double.parseDouble(str);
-			if(max < individual)
-				max = individual;
-		}
-		
-		//map year and total energy
-		context.write(key, new Text("" + max));
+		try {
+			//get max
+			double max = 0;
+			for (Text val : values) {
+				String str = val.toString();
+				double individual =  Double.parseDouble(str);
+				if(max < individual)
+					max = individual;
+			}
+			
+			//map year and total energy
+			context.write(key, new Text("" + max));
+		}catch(Exception e){}
 	 } 
 } // reducer
 
