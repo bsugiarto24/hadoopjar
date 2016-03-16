@@ -31,8 +31,8 @@ public class PowerDays {
 			
 			Job  job = Job.getInstance();
 			job.setJarByClass(PowerDays.class);  
-			FileInputFormat.addInputPath(job, new Path("/datasets/household_power_consumption.txt")); 
-			//FileInputFormat.addInputPath(job, new Path("./power.txt")); 
+			//FileInputFormat.addInputPath(job, new Path("/datasets/household_power_consumption.txt")); 
+			FileInputFormat.addInputPath(job, new Path("./power.txt")); 
 			FileOutputFormat.setOutputPath(job, new Path("./test/","temp")); // put what you need as output file
 			job.setMapperClass(SwitchMapper.class);
 			job.setReducerClass(SwitchReducer.class);
