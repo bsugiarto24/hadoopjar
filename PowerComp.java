@@ -85,7 +85,6 @@ public static class SwitchMapper extends Mapper<LongWritable, Text, Text, Text >
 			double sub3 = Double.parseDouble(text[8]);
 			String flag = "";
 			
-			flag += (sub1 > 1)? "Y" : "N";
 			flag += (sub2 > 1)? "Y" : "N";
 			flag += (sub3 > 1)? "Y" : "N";
 			
@@ -145,7 +144,7 @@ public static class SwitchMapper2 extends Mapper<LongWritable, Text, Text, Text 
 	{
 		
 		String str =  value.toString();
-		String text[] = str.split(" ");
+		String text[] = str.split("\t");
 		context.write(new Text(text[0]), new Text(text[1]));
 		
 	} // map
