@@ -165,7 +165,7 @@ public static class SwitchReducer2 extends  Reducer< Text, Text, Text, Text> {
 			total += individual;
 		}
 		
-		//map year and total energy
+		//map # of devices and total energy
 		context.write(key, new Text("" + total));
 	 } 
 } // reducer
