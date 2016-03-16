@@ -7,6 +7,10 @@ jar cvf kitchenuse.jar *.class
 hadoop fs -rm -r /user/bsugiart/test
 rm -r output
 hadoop jar kitchenuse.jar KitchenUse
-hadoop fs -cat test/output/part-r-00000 
+hadoop fs -cat test/output/part-r-00000
+
+
+
+
 
 

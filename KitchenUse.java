@@ -62,35 +62,36 @@ public static class SwitchMapper extends Mapper<LongWritable, Text, Text, Text >
 		String str =  value.toString();
 		String text[] = str.split(";");
 		
+		if(str.indexOf('0') != -1){
+			double energy = Double.parseDouble(text[3]) *1000 / 60;
+			double sub1 = Double.parseDouble(text[6]);
+			double sub2 = Double.parseDouble(text[7]);
+			double sub3 = Double.parseDouble(text[8]);
+			
+			String date[] = text[0].split("/");
+			String time[] = text[1].split(":");
+			energy = sub1;
+			
+			//map date and energy
+			//16/10/2007;02:26:00;
+			
+			Date d = new Date();
+			Integer.parseInt(time[1]);
+			d.setHours(Integer.parseInt(time[0]));
+			d.setMinutes(Integer.parseInt(time[1]));
+			
+			d.setMonth(Integer.parseInt(date[1]));
+			d.setDate(Integer.parseInt(date[0]));
+			d.setYear(Integer.parseInt(date[2]));
+			
+			
+			long t = d.getTime();
 		
-		double energy = Double.parseDouble(text[3]) *1000 / 60;
-		double sub1 = Double.parseDouble(text[6]);
-		double sub2 = Double.parseDouble(text[7]);
-		double sub3 = Double.parseDouble(text[8]);
-		
-		String date[] = text[0].split("/");
-		String time[] = text[1].split(":");
-		energy = sub1;
-		
-		//map date and energy
-		//16/10/2007;02:26:00;
-		
-		Date d = new Date();
-		Integer.parseInt(time[1]);
-		d.setHours(Integer.parseInt(time[0]));
-		d.setMinutes(Integer.parseInt(time[1]));
-		
-		d.setMonth(Integer.parseInt(date[1]));
-		d.setDate(Integer.parseInt(date[0]));
-		d.setYear(Integer.parseInt(date[2]));
-		
-		
-		long t = d.getTime();
-	
-		Date after =new Date(t + (5 * 60000));
-		
-		context.write(new Text(d.toString()), new Text("" + energy));
-		context.write(new Text(after.toString()), new Text("" + energy));
+			Date after =new Date(t + (5 * 60000));
+			
+			context.write(new Text(d.toString()), new Text("" + energy));
+			context.write(new Text(after.toString()), new Text("" + energy));
+		}
 		
 	} // map
 } // MyMapperClass
