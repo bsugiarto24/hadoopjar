@@ -43,7 +43,9 @@ public class KitchenUse {
 			
 			job2.setJobName("Kitchen Use");
 			
-			job2.setSortComparatorClass(LongWritable.DecreasingComparator.class);
+			//DoubleWritable.Comparator.class
+			
+			job2.setSortComparatorClass(DoubleWritable.Comparator.class);
 			
 			System.exit(job2.waitForCompletion(true) ? 0:1);
 			
